@@ -1,4 +1,4 @@
-import Octokit from '@octokit/rest';
+import * as rest from 'typed-rest-client/RestClient';
 import * as semver from 'semver';
 import * as vi from './version-info';
 
@@ -90,46 +90,44 @@ function convertToVersionInfo(versions: GitHubVersion[]): vi.VersionInfo[] {
   return result;
 }
 
-function getHttpOptions(api_token: string): Octokit.Options {
-  if (api_token) {
-    return { auth: 'token ' + api_token };
-  } else {
-    return {};
-  }
-}
-
-interface GitHubHeaders {
-  link: string;
-}
-
-function getNumPagesFromHeaders(headers: GitHubHeaders): number {
-  if (headers.link) {
-    const last_page_match = headers.link.match(/page=([0-9]*)>; rel="last"/);
-    if (last_page_match && last_page_match.length > 1) {
-      return parseInt(last_page_match[1], 10);
+function getHttpOptions(
+  api_token: string,
+  page_number: number
+): rest.IRequestOptions {
+  let options: rest.IRequestOptions = {
+    queryParameters: {
+      params: { page: page_number }
     }
+  };
+  if (api_token) {
+    options.additionalHeaders = { Authorization: 'token ' + api_token };
   }
-  return 1;
+  return options;
 }
 
 export async function getAllVersionInfo(
   api_token: string = ''
 ): Promise<vi.VersionInfo[]> {
-  const client = new Octokit(getHttpOptions(api_token));
-  const first_page = await client.repos.listReleases({
-    owner: 'Kitware',
-    repo: 'CMake'
-  });
-  let raw_versions: GitHubVersion[] = first_page.data;
-  const last_page = getNumPagesFromHeaders(first_page.headers);
-  let cur_page = 2;
-  for (; cur_page <= last_page; cur_page++) {
-    const this_page = await client.repos.listReleases({
-      owner: 'Kitware',
-      repo: 'CMake',
-      page: cur_page
-    });
-    raw_versions = raw_versions.concat(this_page.data);
+  const client = new rest.RestClient(USER_AGENT);
+  let cur_page = 1;
+  let raw_versions: GitHubVersion[] = [];
+  let has_next_page = true;
+  while (has_next_page) {
+    const options = getHttpOptions(api_token, cur_page);
+    const version_response = await client.get<GitHubVersion[]>(
+      VERSION_URL,
+      options
+    );
+    const headers: { link?: string } = version_response.headers;
+    if (headers.link && headers.link.match(/rel="next"/)) {
+      has_next_page = true;
+    } else {
+      has_next_page = false;
+    }
+    if (version_response.result) {
+      raw_versions = raw_versions.concat(version_response.result);
+    }
+    cur_page++;
   }
   const versions: vi.VersionInfo[] = convertToVersionInfo(raw_versions);
   return versions;

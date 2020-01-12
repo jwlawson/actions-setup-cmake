@@ -42,11 +42,7 @@ export async function addCMakeToToolCache(
   return await tc.cacheDir(extracted_archive, PACKAGE_NAME, version.name);
 }
 
-export async function addCMakeToPath(version: vi.VersionInfo): Promise<void> {
-  let tool_path: string = tc.find(PACKAGE_NAME, version.name);
-  if (!tool_path) {
-    tool_path = await addCMakeToToolCache(version);
-  }
+async function getBinDirectoryFrom(tool_path: string): Promise<string> {
   // The cmake archive should have a single top level directory with a name
   // similar to 'cmake-3.16.2-win64-x64'. This then has subdirectories 'bin',
   // 'doc', 'share'.
@@ -54,6 +50,25 @@ export async function addCMakeToPath(version: vi.VersionInfo): Promise<void> {
   if (root_dir_path.length != 1) {
     throw new Error('Archive does not have expected layout.');
   }
-  const bin_path = path.join(tool_path, root_dir_path[0], 'bin');
-  await core.addPath(bin_path);
+  if (process.platform === 'darwin') {
+    // On MacOS the bin directory is hidden behind a few more folders
+    // e.g. <tool_path>/cmake-3.16.2-Darwin-x86_64/CMake.app/Contents/bin/
+    return path.join(
+      tool_path,
+      root_dir_path[0],
+      'CMake.app',
+      'Contents',
+      'bin'
+    );
+  } else {
+    return path.join(tool_path, root_dir_path[0], 'bin');
+  }
+}
+
+export async function addCMakeToPath(version: vi.VersionInfo): Promise<void> {
+  let tool_path: string = tc.find(PACKAGE_NAME, version.name);
+  if (!tool_path) {
+    tool_path = await addCMakeToToolCache(version);
+  }
+  await core.addPath(await getBinDirectoryFrom(tool_path));
 }
