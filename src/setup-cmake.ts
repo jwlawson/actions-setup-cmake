@@ -1,6 +1,6 @@
 import * as tc from '@actions/tool-cache';
 import * as core from '@actions/core';
-import * as fs from 'fs';
+import { promises as fsPromises } from 'fs';
 import * as path from 'path';
 import * as vi from './version-info';
 
@@ -47,6 +47,13 @@ export async function addCMakeToPath(version: vi.VersionInfo): Promise<void> {
   if (!tool_path) {
     tool_path = await addCMakeToToolCache(version);
   }
-  const bin_path = path.join(tool_path, 'bin');
+  // The cmake archive should have a single top level directory with a name
+  // similar to 'cmake-3.16.2-win64-x64'. This then has subdirectories 'bin',
+  // 'doc', 'share'.
+  const root_dir_path = await fsPromises.readdir(tool_path);
+  if (root_dir_path.length != 1) {
+    throw new Error('Archive does not have expected layout.');
+  }
+  const bin_path = path.join(tool_path, root_dir_path[0], 'bin');
   await core.addPath(bin_path);
 }

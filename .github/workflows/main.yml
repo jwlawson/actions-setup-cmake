@@ -16,7 +16,7 @@ jobs:
       uses: ./
       id: setup
       with:
-        bazel-version: '3.15.1'
+        cmake-version: '3.15.1'
         github-api-token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Run cmake --version
@@ -43,6 +43,7 @@ jobs:
     - name: Format
       run: |
         npm run format
+        git diff
         git diff --quiet
 
     - name: Run tests
