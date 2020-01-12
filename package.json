@@ -1,0 +1,60 @@
+{
+  "name": "actions-setup-cmake",
+  "version": "0.0.1",
+  "description": "GitHub action to setup cmake",
+  "main": "index.js",
+  "scripts": {
+    "package": "ncc build src/index.ts -m -o dist",
+    "format": "prettier --write **/*.ts __tests__/**/*.js",
+    "prepare": "npm run format && npm run package",
+    "test": "jest"
+  },
+  "keywords": [
+    "cmake",
+    "action",
+    "setup"
+  ],
+  "author": "John Lawson",
+  "license": "BSD-3-Clause-Clear",
+  "dependencies": {
+    "@actions/core": "^1.2.0",
+    "@actions/tool-cache": "^1.1.2",
+    "@octokit/rest": "^16.36.0",
+    "semver": "^6.0.0"
+  },
+  "devDependencies": {
+    "@actions/github": "^2.0.1",
+    "@actions/io": "^1.0.1",
+    "@types/jest": "^24.0.25",
+    "@types/semver": "^6.2.0",
+    "@zeit/ncc": "^0.21.0",
+    "husky": "^3.1.0",
+    "jest": "^24.9.0",
+    "nock": "^10.0.6",
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.3.0",
+    "typescript": "^3.7.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/*.test.ts"
+    ],
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    }
+  },
+  "husky": {
+    "skipCI": true,
+    "hooks": {
+      "pre-commit": "npm run prepare && git add dist/"
+    }
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "printWidth": 80,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "useTabs": false
+  }
+}

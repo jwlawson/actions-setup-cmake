@@ -1,0 +1,1559 @@
+[
+  {
+    "url": "https://api.github.com/repos/Kitware/CMake/releases/14388575",
+    "tag_name": "v2.4.8",
+    "name": "",
+    "draft": false,
+    "prerelease": false,
+    "assets": [
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030266",
+        "name": "cmake-2.4.8-SunOS-sparc.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-SunOS-sparc.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030267",
+        "name": "cmake-2.4.8-win32-x86.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-win32-x86.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030268",
+        "name": "cmake-2.4.8-Linux-i386.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-Linux-i386.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030270",
+        "name": "cmake-2.4.8-Darwin-universal.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-Darwin-universal.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030271",
+        "name": "cmake-2.4.8.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030272",
+        "name": "cmake-2.4.8-HP-UX-9000_785.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-HP-UX-9000_785.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030273",
+        "name": "cmake-2.4.8-SunOS-sparc.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-SunOS-sparc.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030274",
+        "name": "cmake-2.4.8-AIX-powerpc.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-AIX-powerpc.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030277",
+        "name": "cmake-2.4.8-HP-UX-9000_785.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-HP-UX-9000_785.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030278",
+        "name": "cmake-2.4.8-IRIX64-64.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-IRIX64-64.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030279",
+        "name": "cmake-2.4.8-SunOS-sparc.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-SunOS-sparc.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030280",
+        "name": "cmake-2.4.8-IRIX64-n32.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-IRIX64-n32.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030281",
+        "name": "cmake-2.4.8-Darwin-universal.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-Darwin-universal.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030282",
+        "name": "cmake-2.4.8-win32-x86.exe",
+        "content_type": "application/x-msdos-program",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-win32-x86.exe"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030283",
+        "name": "cmake-2.4.8.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030284",
+        "name": "cmake-2.4.8-IRIX64-n32.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-IRIX64-n32.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030285",
+        "name": "cmake-2.4.8-Darwin-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-Darwin-universal.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030287",
+        "name": "cmake-2.4.8-IRIX64-n32.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-IRIX64-n32.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030288",
+        "name": "cmake-2.4.8-HP-UX-9000_785.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-HP-UX-9000_785.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030292",
+        "name": "cmake-2.4.8-IRIX64-64.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-IRIX64-64.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030293",
+        "name": "cmake-2.4.8-AIX-powerpc.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-AIX-powerpc.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030295",
+        "name": "cmake-2.4.8.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030297",
+        "name": "cmake-2.4.8-Linux-i386.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-Linux-i386.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030299",
+        "name": "cmake-2.4.8-IRIX64-64.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-IRIX64-64.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030302",
+        "name": "cmake-2.4.8-AIX-powerpc.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-AIX-powerpc.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030305",
+        "name": "cmake-2.4.8-Linux-i386.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.4.8/cmake-2.4.8-Linux-i386.tar.gz"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/Kitware/CMake/releases/14388551",
+    "tag_name": "v2.6.4",
+    "name": "",
+    "draft": false,
+    "prerelease": false,
+    "assets": [
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030193",
+        "name": "cmake-2.6.4-IRIX64-64.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-IRIX64-64.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030195",
+        "name": "cmake-2.6.4-SunOS-sparc.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-SunOS-sparc.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030205",
+        "name": "cmake-2.6.4-1-src.tar.bz2",
+        "content_type": "application/x-tar",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-1-src.tar.bz2"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030211",
+        "name": "cmake-2.6.4-IRIX64-n32.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-IRIX64-n32.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030215",
+        "name": "cmake-2.6.4-Linux-i386.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-Linux-i386.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030220",
+        "name": "cmake-2.6.4-1.tar.bz2",
+        "content_type": "application/x-tar",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-1.tar.bz2"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030223",
+        "name": "cmake-2.6.4-HP-UX-9000_785.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-HP-UX-9000_785.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030226",
+        "name": "cmake-2.6.4-AIX-powerpc.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-AIX-powerpc.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030228",
+        "name": "cmake-2.6.4.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030229",
+        "name": "cmake-2.6.4-IRIX64-n32.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-IRIX64-n32.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030232",
+        "name": "cmake-2.6.4.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030233",
+        "name": "cmake-2.6.4-SunOS-sparc.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-SunOS-sparc.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030234",
+        "name": "cmake-2.6.4-win32-x86.exe",
+        "content_type": "application/x-msdos-program",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-win32-x86.exe"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030239",
+        "name": "CMakeChangeLog-2.6.4",
+        "content_type": "None",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/CMakeChangeLog-2.6.4"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030240",
+        "name": "cmake-2.6.4-HP-UX-9000_785.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-HP-UX-9000_785.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030241",
+        "name": "cmake-2.6.4-IRIX64-64.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-IRIX64-64.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030244",
+        "name": "cmake-2.6.4-Linux-i386.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-Linux-i386.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030245",
+        "name": "cmake-2.6.4-AIX-powerpc.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-AIX-powerpc.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030247",
+        "name": "cmake-2.6.4-win32-x86.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-win32-x86.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030248",
+        "name": "cmake-2.6.4-SunOS-sparc.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-SunOS-sparc.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030249",
+        "name": "cmake-2.6.4-IRIX64-64.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-IRIX64-64.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030250",
+        "name": "cmake-2.6.4-HP-UX-9000_785.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-HP-UX-9000_785.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030252",
+        "name": "cmake-2.6.4-Linux-i386.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-Linux-i386.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030253",
+        "name": "cmake-2.6.4-Darwin-universal.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-Darwin-universal.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030257",
+        "name": "cmake-2.6.4-Darwin-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-Darwin-universal.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030259",
+        "name": "cmake-2.6.4-IRIX64-n32.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-IRIX64-n32.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030260",
+        "name": "cmake-2.6.4-AIX-powerpc.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-AIX-powerpc.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030262",
+        "name": "cmake-2.6.4.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030263",
+        "name": "cmake-2.6.4-Darwin-universal.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.6.4/cmake-2.6.4-Darwin-universal.tar.gz"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/Kitware/CMake/releases/14388507",
+    "tag_name": "v2.8.12.2",
+    "name": "",
+    "draft": false,
+    "prerelease": false,
+    "assets": [
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030124",
+        "name": "cmake-2.8.12.2-IRIX64-64.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-IRIX64-64.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030125",
+        "name": "cmake-2.8.12.2-AIX-powerpc.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-AIX-powerpc.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030126",
+        "name": "cmake-2.8.12.2-AIX-powerpc.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-AIX-powerpc.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030127",
+        "name": "cmake-2.8.12.2-Darwin-universal.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-Darwin-universal.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030128",
+        "name": "cmake-2.8.12.2-Linux-i386.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-Linux-i386.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030130",
+        "name": "cmake-2.8.12.2-Linux-i386.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-Linux-i386.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030132",
+        "name": "cmake-2.8.12.2-Darwin-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-Darwin-universal.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030135",
+        "name": "cmake-2.8.12.2-Linux-i386.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-Linux-i386.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030139",
+        "name": "cmake-2.8.12.2.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030141",
+        "name": "cmake-2.8.12.2-Darwin64-universal.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-Darwin64-universal.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030148",
+        "name": "cmake-2.8.12.2.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030150",
+        "name": "cmake-2.8.12.2-SHA-256.txt",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-SHA-256.txt"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030151",
+        "name": "cmake-2.8.12.2-AIX-powerpc.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-AIX-powerpc.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030157",
+        "name": "cmake-2.8.12.2-IRIX64-64.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-IRIX64-64.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030159",
+        "name": "cmake-2.8.12.2-IRIX64-n32.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-IRIX64-n32.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030164",
+        "name": "cmake-2.8.12.2-win32-x86.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-win32-x86.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030171",
+        "name": "cmake-2.8.12.2-Darwin64-universal.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-Darwin64-universal.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030174",
+        "name": "cmake-2.8.12.2.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030176",
+        "name": "cmake-2.8.12.2-IRIX64-64.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-IRIX64-64.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030178",
+        "name": "cmake-2.8.12.2-SHA-256.txt.asc",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-SHA-256.txt.asc"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030179",
+        "name": "cmake-2.8.12.2-IRIX64-n32.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-IRIX64-n32.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030180",
+        "name": "cmake-2.8.12.2-Darwin-universal.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-Darwin-universal.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030182",
+        "name": "cmake-2.8.12.2-Darwin64-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-Darwin64-universal.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030189",
+        "name": "cmake-2.8.12.2-win32-x86.exe",
+        "content_type": "application/x-msdos-program",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-win32-x86.exe"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/10030191",
+        "name": "cmake-2.8.12.2-IRIX64-n32.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.12.2/cmake-2.8.12.2-IRIX64-n32.sh"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/Kitware/CMake/releases/14318748",
+    "tag_name": "v2.8.10.2",
+    "name": "",
+    "draft": false,
+    "prerelease": false,
+    "assets": [
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969284",
+        "name": "cmake-2.8.10.2-Darwin64-universal.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-Darwin64-universal.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969290",
+        "name": "cmake-2.8.10.2-IRIX64-64.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-IRIX64-64.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969291",
+        "name": "cmake-2.8.10.2-win32-x86.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-win32-x86.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969295",
+        "name": "cmake-2.8.10.2-IRIX64-n32.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-IRIX64-n32.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969297",
+        "name": "cmake-2.8.10.2-AIX-powerpc.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-AIX-powerpc.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969299",
+        "name": "CMakeChangeLog-2.8.10.2",
+        "content_type": "None",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/CMakeChangeLog-2.8.10.2"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969300",
+        "name": "cmake-2.8.10.2-Linux-i386.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-Linux-i386.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969303",
+        "name": "cmake-2.8.10.2-Linux-i386.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-Linux-i386.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969307",
+        "name": "cmake-2.8.10.2.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969313",
+        "name": "cmake-2.8.10.2-Linux-i386.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-Linux-i386.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969321",
+        "name": "cmake-2.8.10.2.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969323",
+        "name": "cmake-2.8.10.2.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969325",
+        "name": "cmake-2.8.10.2-Darwin64-universal.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-Darwin64-universal.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969328",
+        "name": "cmake-2.8.10.2-win32-x86.exe",
+        "content_type": "application/x-msdos-program",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-win32-x86.exe"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969330",
+        "name": "cmake-2.8.10.2-Darwin-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-Darwin-universal.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969332",
+        "name": "cmake-2.8.10.2-AIX-powerpc.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-AIX-powerpc.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969337",
+        "name": "cmake-2.8.10.2-SHA-256.txt.asc",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-SHA-256.txt.asc"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969338",
+        "name": "cmake-2.8.10.2-Darwin-universal.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-Darwin-universal.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969340",
+        "name": "cmake-2.8.10.2-IRIX64-64.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-IRIX64-64.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969341",
+        "name": "cmake-2.8.10.2-SHA-256.txt",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-SHA-256.txt"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969342",
+        "name": "cmake-2.8.10.2-IRIX64-64.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-IRIX64-64.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969347",
+        "name": "cmake-2.8.10.2-Darwin64-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-Darwin64-universal.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969352",
+        "name": "cmake-2.8.10.2-AIX-powerpc.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-AIX-powerpc.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969361",
+        "name": "cmake-2.8.10.2-Darwin-universal.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-Darwin-universal.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969363",
+        "name": "cmake-2.8.10.2-IRIX64-n32.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-IRIX64-n32.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969364",
+        "name": "cmake-2.8.10.2-IRIX64-n32.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v2.8.10.2/cmake-2.8.10.2-IRIX64-n32.tar.Z"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/Kitware/CMake/releases/14318505",
+    "tag_name": "v3.0.0",
+    "name": "",
+    "draft": false,
+    "prerelease": false,
+    "assets": [
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969116",
+        "name": "cmake-3.0.0-Darwin64-universal.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0-Darwin64-universal.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969122",
+        "name": "cmake-3.0.0-win32-x86.exe",
+        "content_type": "application/x-msdos-program",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0-win32-x86.exe"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969124",
+        "name": "cmake-3.0.0-1.tar.bz2",
+        "content_type": "application/x-tar",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0-1.tar.bz2"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969125",
+        "name": "cmake-3.0.0.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969127",
+        "name": "cmake-3.0.0-win32-x86.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0-win32-x86.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969132",
+        "name": "cmake-3.0.0-Linux-i386.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0-Linux-i386.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969133",
+        "name": "cmake-3.0.0-Darwin-universal.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0-Darwin-universal.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969137",
+        "name": "cmake-3.0.0.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969138",
+        "name": "cmake-3.0.0-Linux-i386.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0-Linux-i386.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969148",
+        "name": "cmake-3.0.0-Linux-i386.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0-Linux-i386.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969158",
+        "name": "cmake-3.0.0-1-src.tar.bz2",
+        "content_type": "application/x-tar",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0-1-src.tar.bz2"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969162",
+        "name": "cmake-3.0.0-Darwin-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0-Darwin-universal.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969172",
+        "name": "cmake-3.0.0.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969173",
+        "name": "cmake-3.0.0-Darwin-universal.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0-Darwin-universal.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969181",
+        "name": "cmake-3.0.0-SHA-256.txt.asc",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0-SHA-256.txt.asc"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969182",
+        "name": "cmake-3.0.0-Darwin64-universal.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0-Darwin64-universal.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969186",
+        "name": "cmake-3.0.0-Darwin64-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0-Darwin64-universal.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969191",
+        "name": "cmake-3.0.0-SHA-256.txt",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.0/cmake-3.0.0-SHA-256.txt"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/Kitware/CMake/releases/14318431",
+    "tag_name": "v3.0.1",
+    "name": "",
+    "draft": false,
+    "prerelease": false,
+    "assets": [
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969067",
+        "name": "cmake-3.0.1-SHA-256.txt.asc",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1-SHA-256.txt.asc"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969068",
+        "name": "cmake-3.0.1-SHA-256.txt",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1-SHA-256.txt"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969069",
+        "name": "cmake-3.0.1.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969070",
+        "name": "cmake-3.0.1-1.tar.bz2",
+        "content_type": "application/x-tar",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1-1.tar.bz2"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969073",
+        "name": "cmake-3.0.1-win32-x86.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1-win32-x86.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969075",
+        "name": "cmake-3.0.1-Linux-i386.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1-Linux-i386.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969081",
+        "name": "cmake-3.0.1-Linux-i386.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1-Linux-i386.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969084",
+        "name": "cmake-3.0.1-win32-x86.exe",
+        "content_type": "application/x-msdos-program",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1-win32-x86.exe"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969085",
+        "name": "cmake-3.0.1-1-src.tar.bz2",
+        "content_type": "application/x-tar",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1-1-src.tar.bz2"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969088",
+        "name": "cmake-3.0.1-Darwin64-universal.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1-Darwin64-universal.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969093",
+        "name": "cmake-3.0.1.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969094",
+        "name": "cmake-3.0.1-Darwin-universal.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1-Darwin-universal.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969097",
+        "name": "cmake-3.0.1.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969098",
+        "name": "cmake-3.0.1-Darwin-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1-Darwin-universal.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969100",
+        "name": "cmake-3.0.1-Darwin64-universal.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1-Darwin64-universal.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969102",
+        "name": "cmake-3.0.1-Linux-i386.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1-Linux-i386.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969104",
+        "name": "cmake-3.0.1-Darwin-universal.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1-Darwin-universal.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969113",
+        "name": "cmake-3.0.1-Darwin64-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.1/cmake-3.0.1-Darwin64-universal.dmg"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/Kitware/CMake/releases/14318364",
+    "tag_name": "v3.0.2",
+    "name": "",
+    "draft": false,
+    "prerelease": false,
+    "assets": [
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969018",
+        "name": "cmake-3.0.2-win32-x86.exe",
+        "content_type": "application/x-msdos-program",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-win32-x86.exe"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969019",
+        "name": "cmake-3.0.2-Darwin64-universal.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-Darwin64-universal.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969025",
+        "name": "cmake-3.0.2.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969026",
+        "name": "cmake-3.0.2-Darwin64-universal.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-Darwin64-universal.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969032",
+        "name": "cmake-3.0.2-Darwin-universal.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-Darwin-universal.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969035",
+        "name": "cmake-3.0.2-Darwin-universal.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-Darwin-universal.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969037",
+        "name": "cmake-3.0.2-win32-x86.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-win32-x86.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969048",
+        "name": "cmake-3.0.2-Linux-i386.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-Linux-i386.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969049",
+        "name": "cmake-3.0.2-1.tar.bz2",
+        "content_type": "application/x-tar",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-1.tar.bz2"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969050",
+        "name": "cmake-3.0.2.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969051",
+        "name": "cmake-3.0.2-Darwin-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-Darwin-universal.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969056",
+        "name": "cmake-3.0.2.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969057",
+        "name": "cmake-3.0.2-SHA-256.txt",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-SHA-256.txt"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969058",
+        "name": "cmake-3.0.2-Darwin64-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-Darwin64-universal.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969062",
+        "name": "cmake-3.0.2-Linux-i386.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-Linux-i386.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969063",
+        "name": "cmake-3.0.2-1-src.tar.bz2",
+        "content_type": "application/x-tar",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-1-src.tar.bz2"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969064",
+        "name": "cmake-3.0.2-Linux-i386.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-Linux-i386.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969066",
+        "name": "cmake-3.0.2-SHA-256.txt.asc",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-SHA-256.txt.asc"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/Kitware/CMake/releases/14318259",
+    "tag_name": "v3.1.0",
+    "name": "",
+    "draft": false,
+    "prerelease": false,
+    "assets": [
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968947",
+        "name": "cmake-3.1.0-Linux-i386.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-Linux-i386.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968952",
+        "name": "cmake-3.1.0-Darwin64.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-Darwin64.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968955",
+        "name": "cmake-3.1.0.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968956",
+        "name": "cmake-3.1.0-SHA-256.txt",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-SHA-256.txt"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968958",
+        "name": "cmake-3.1.0-Darwin64-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-Darwin64-universal.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968962",
+        "name": "cmake-3.1.0-Darwin64.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-Darwin64.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968967",
+        "name": "cmake-3.1.0-SHA-256.txt.asc",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-SHA-256.txt.asc"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968968",
+        "name": "cmake-3.1.0.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968975",
+        "name": "cmake-3.1.0-Darwin64-universal.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-Darwin64-universal.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968978",
+        "name": "cmake-3.1.0.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968979",
+        "name": "cmake-3.1.0-Darwin-universal.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-Darwin-universal.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968980",
+        "name": "cmake-3.1.0-1.tar.bz2",
+        "content_type": "application/x-tar",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-1.tar.bz2"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968981",
+        "name": "cmake-3.1.0-Linux-x86_64.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-Linux-x86_64.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968986",
+        "name": "cmake-3.1.0-Linux-i386.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-Linux-i386.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968990",
+        "name": "cmake-3.1.0-Darwin64.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-Darwin64.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968997",
+        "name": "cmake-3.1.0-Linux-x86_64.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-Linux-x86_64.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968999",
+        "name": "cmake-3.1.0-Linux-i386.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-Linux-i386.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969006",
+        "name": "cmake-3.1.0-Linux-x86_64.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-Linux-x86_64.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969012",
+        "name": "cmake-3.1.0-1-src.tar.bz2",
+        "content_type": "application/x-tar",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-1-src.tar.bz2"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969013",
+        "name": "cmake-3.1.0-win32-x86.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-win32-x86.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969016",
+        "name": "cmake-3.1.0-win32-x86.exe",
+        "content_type": "application/x-msdos-program",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-win32-x86.exe"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9969017",
+        "name": "cmake-3.1.0-Darwin-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.0/cmake-3.1.0-Darwin-universal.dmg"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/Kitware/CMake/releases/14318202",
+    "tag_name": "v3.1.1",
+    "name": "",
+    "draft": false,
+    "prerelease": false,
+    "assets": [
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968900",
+        "name": "cmake-3.1.1-Linux-x86_64.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-Linux-x86_64.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968902",
+        "name": "cmake-3.1.1.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968903",
+        "name": "cmake-3.1.1-1-src.tar.bz2",
+        "content_type": "application/x-tar",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-1-src.tar.bz2"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968904",
+        "name": "cmake-3.1.1-win32-x86.exe",
+        "content_type": "application/x-msdos-program",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-win32-x86.exe"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968905",
+        "name": "cmake-3.1.1-SHA-256.txt",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-SHA-256.txt"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968906",
+        "name": "cmake-3.1.1-Linux-x86_64.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-Linux-x86_64.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968912",
+        "name": "cmake-3.1.1-Linux-x86_64.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-Linux-x86_64.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968916",
+        "name": "cmake-3.1.1-Linux-i386.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-Linux-i386.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968920",
+        "name": "cmake-3.1.1-Darwin-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-Darwin-universal.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968922",
+        "name": "cmake-3.1.1-Linux-i386.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-Linux-i386.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968925",
+        "name": "cmake-3.1.1-1.tar.bz2",
+        "content_type": "application/x-tar",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-1.tar.bz2"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968926",
+        "name": "cmake-3.1.1.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968927",
+        "name": "cmake-3.1.1-Linux-i386.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-Linux-i386.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968929",
+        "name": "cmake-3.1.1-Darwin-universal.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-Darwin-universal.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968930",
+        "name": "cmake-3.1.1-Darwin-x86_64.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-Darwin-x86_64.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968932",
+        "name": "cmake-3.1.1-Darwin-x86_64.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-Darwin-x86_64.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968935",
+        "name": "cmake-3.1.1.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968936",
+        "name": "cmake-3.1.1-Darwin-universal.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-Darwin-universal.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968940",
+        "name": "cmake-3.1.1-win32-x86.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-win32-x86.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968941",
+        "name": "cmake-3.1.1-SHA-256.txt.asc",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-SHA-256.txt.asc"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968942",
+        "name": "cmake-3.1.1-Darwin-x86_64.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.1/cmake-3.1.1-Darwin-x86_64.dmg"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/Kitware/CMake/releases/14318138",
+    "tag_name": "v3.1.2",
+    "name": "",
+    "draft": false,
+    "prerelease": false,
+    "assets": [
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968852",
+        "name": "cmake-3.1.2-Darwin-universal.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2-Darwin-universal.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968857",
+        "name": "cmake-3.1.2-Linux-x86_64.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2-Linux-x86_64.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968858",
+        "name": "cmake-3.1.2.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968860",
+        "name": "cmake-3.1.2-Darwin-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2-Darwin-universal.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968864",
+        "name": "cmake-3.1.2-SHA-256.txt.asc",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2-SHA-256.txt.asc"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968865",
+        "name": "cmake-3.1.2-SHA-256.txt",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2-SHA-256.txt"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968866",
+        "name": "cmake-3.1.2-Linux-i386.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2-Linux-i386.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968874",
+        "name": "cmake-3.1.2.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968876",
+        "name": "cmake-3.1.2-Linux-i386.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2-Linux-i386.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968878",
+        "name": "cmake-3.1.2-Darwin-universal.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2-Darwin-universal.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968884",
+        "name": "cmake-3.1.2-Linux-x86_64.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2-Linux-x86_64.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968886",
+        "name": "cmake-3.1.2-Linux-x86_64.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2-Linux-x86_64.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968888",
+        "name": "cmake-3.1.2-Darwin-x86_64.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2-Darwin-x86_64.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968891",
+        "name": "cmake-3.1.2-Darwin-x86_64.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2-Darwin-x86_64.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968892",
+        "name": "cmake-3.1.2-win32-x86.exe",
+        "content_type": "application/x-msdos-program",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2-win32-x86.exe"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968894",
+        "name": "cmake-3.1.2.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968896",
+        "name": "cmake-3.1.2-win32-x86.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2-win32-x86.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968897",
+        "name": "cmake-3.1.2-Linux-i386.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2-Linux-i386.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968898",
+        "name": "cmake-3.1.2-Darwin-x86_64.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.2/cmake-3.1.2-Darwin-x86_64.tar.Z"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/Kitware/CMake/releases/14318103",
+    "tag_name": "v3.1.3",
+    "name": "",
+    "draft": false,
+    "prerelease": false,
+    "assets": [
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968824",
+        "name": "cmake-3.1.3.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968825",
+        "name": "cmake-3.1.3-1-src.tar.bz2",
+        "content_type": "application/x-tar",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-1-src.tar.bz2"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968826",
+        "name": "cmake-3.1.3.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968827",
+        "name": "cmake-3.1.3-Darwin-universal.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-Darwin-universal.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968828",
+        "name": "cmake-3.1.3-Linux-x86_64.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-Linux-x86_64.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968829",
+        "name": "cmake-3.1.3-Darwin-x86_64.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-Darwin-x86_64.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968830",
+        "name": "cmake-3.1.3-Linux-i386.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-Linux-i386.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968831",
+        "name": "cmake-3.1.3-Darwin-x86_64.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-Darwin-x86_64.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968833",
+        "name": "cmake-3.1.3-1.tar.bz2",
+        "content_type": "application/x-tar",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-1.tar.bz2"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968835",
+        "name": "cmake-3.1.3-Linux-i386.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-Linux-i386.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968836",
+        "name": "cmake-3.1.3-Linux-x86_64.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-Linux-x86_64.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968837",
+        "name": "cmake-3.1.3-win32-x86.exe",
+        "content_type": "application/x-msdos-program",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-win32-x86.exe"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968838",
+        "name": "cmake-3.1.3-SHA-256.txt",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-SHA-256.txt"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968839",
+        "name": "cmake-3.1.3-Linux-x86_64.sh",
+        "content_type": "application/x-shellscript",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-Linux-x86_64.sh"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968841",
+        "name": "cmake-3.1.3-SHA-256.txt.asc",
+        "content_type": "text/plain",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-SHA-256.txt.asc"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968842",
+        "name": "cmake-3.1.3-win32-x86.zip",
+        "content_type": "application/zip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-win32-x86.zip"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968843",
+        "name": "cmake-3.1.3-Darwin-x86_64.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-Darwin-x86_64.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968844",
+        "name": "cmake-3.1.3-Darwin-universal.dmg",
+        "content_type": "application/x-apple-diskimage",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-Darwin-universal.dmg"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968845",
+        "name": "cmake-3.1.3.tar.Z",
+        "content_type": "application/x-compress",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3.tar.Z"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968846",
+        "name": "cmake-3.1.3-Darwin-universal.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-Darwin-universal.tar.gz"
+      },
+      {
+        "url": "https://api.github.com/repos/Kitware/CMake/releases/assets/9968848",
+        "name": "cmake-3.1.3-Linux-i386.tar.gz",
+        "content_type": "application/gzip",
+        "browser_download_url": "https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-Linux-i386.tar.gz"
+      }
+    ]
+  }
+]

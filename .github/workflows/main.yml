@@ -1,0 +1,49 @@
+on: [push]
+
+jobs:
+  action_tests:
+    runs-on: ${{ matrix.os }}
+    name: Action Test
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Setup cmake
+      uses: ./
+      id: setup
+      with:
+        bazel-version: '3.15.1'
+        github-api-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Run cmake --version
+      shell: bash
+      run: |
+        VERSION=`cmake --version`
+        echo $VERSION
+        test "$VERSION" = "v3.15.1"
+
+  unit_tests:
+    runs-on: ${{ matrix.os }}
+    name: Unit Test
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Install
+      run: npm install
+
+    - name: Format
+      run: |
+        npm run format
+        git diff --quiet
+
+    - name: Run tests
+      run: npm test

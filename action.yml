@@ -1,0 +1,12 @@
+name: 'actions-setup-cmake'
+description: 'Setup the cmake build generator'
+inputs:
+  cmake-version:
+    description: 'The version of cmake to setup. E.g. 3.14.0'
+    default: ''
+  github-api-token:
+    description: 'GitHub token to use when retrieving version info'
+    default: ''
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
