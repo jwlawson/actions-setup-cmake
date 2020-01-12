@@ -24,7 +24,7 @@ jobs:
       run: |
         VERSION=`cmake --version`
         echo $VERSION
-        test "$VERSION" = "v3.15.1"
+        [[ "$VERSION" =~ "3.15.1" ]]
 
   unit_tests:
     runs-on: ${{ matrix.os }}

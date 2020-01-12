@@ -1,5 +1,4 @@
 import Octokit from '@octokit/rest';
-import * as rest from 'typed-rest-client/RestClient';
 import * as semver from 'semver';
 import * as vi from './version-info';
 

@@ -2,7 +2,11 @@
   "name": "actions-setup-cmake",
   "version": "0.0.1",
   "description": "GitHub action to setup cmake",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jwlawson/actions-setup-cmake"
+  },
   "scripts": {
     "package": "ncc build src/index.ts -m -o dist",
     "format": "prettier --write **/*.ts __tests__/**/*.js",
