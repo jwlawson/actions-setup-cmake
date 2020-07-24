@@ -7,16 +7,21 @@ import * as vi from './version-info';
 const PACKAGE_NAME: string = 'cmake';
 
 function getURL(version: vi.VersionInfo): string {
-  const matching_assets: vi.AssetInfo[] = version.assets
+  var matching_assets: vi.AssetInfo[] = version.assets
     .filter((a) => a.platform === process.platform && a.filetype === 'archive')
     .sort();
-  const num_found = matching_assets.length;
+  const num_found: number = matching_assets.length;
   if (num_found == 0) {
     throw new Error(
       `Could not find ${process.platform} asset for cmake version ${version.name}`
     );
   }
-  const asset_url = matching_assets[0].url;
+  if (num_found > 1) {
+    // If there are multiple assets it is likely to be because there are MacOS
+    // builds for PPC, x86 and x86_64.
+    matching_assets = matching_assets.filter((a) => a.url.match('64'));
+  }
+  const asset_url: string = matching_assets[0].url;
   core.debug(
     `Found ${num_found} assets for ${process.platform} with version ${version.name}`
   );
