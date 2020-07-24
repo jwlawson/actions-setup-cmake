@@ -53,13 +53,10 @@ async function getBinDirectoryFrom(tool_path: string): Promise<string> {
   if (process.platform === 'darwin') {
     // On MacOS the bin directory is hidden behind a few more folders
     // e.g. <tool_path>/cmake-3.16.2-Darwin-x86_64/CMake.app/Contents/bin/
-    return path.join(
-      tool_path,
-      root_dir_path[0],
-      'CMake.app',
-      'Contents',
-      'bin'
-    );
+    //   or <tool_path>/cmake-2.8.10-Darwin-x86_64/CMake 2.8-10.app/Contents/bin/
+    const base = path.join(tool_path, root_dir_path[0]);
+    const app_dir = await fsPromises.readdir(base);
+    return path.join(base, app_dir[0], 'Contents', 'bin');
   } else {
     return path.join(tool_path, root_dir_path[0], 'bin');
   }
