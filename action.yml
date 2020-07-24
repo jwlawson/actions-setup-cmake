@@ -6,7 +6,7 @@ inputs:
     default: ''
   github-api-token:
     description: 'GitHub token to use when retrieving version info'
-    default: ''
+    default: '${{ github.token }}'
 runs:
   using: 'node12'
   main: 'dist/index.js'
