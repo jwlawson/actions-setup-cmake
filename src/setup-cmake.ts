@@ -7,16 +7,21 @@ import * as vi from './version-info';
 const PACKAGE_NAME: string = 'cmake';
 
 function getURL(version: vi.VersionInfo): string {
-  const matching_assets: vi.AssetInfo[] = version.assets
+  var matching_assets: vi.AssetInfo[] = version.assets
     .filter((a) => a.platform === process.platform && a.filetype === 'archive')
     .sort();
-  const num_found = matching_assets.length;
+  const num_found: number = matching_assets.length;
   if (num_found == 0) {
     throw new Error(
       `Could not find ${process.platform} asset for cmake version ${version.name}`
     );
   }
-  const asset_url = matching_assets[0].url;
+  if (num_found > 1) {
+    // If there are multiple assets it is likely to be because there are MacOS
+    // builds for PPC, x86 and x86_64.
+    matching_assets = matching_assets.filter((a) => a.url.match('64'));
+  }
+  const asset_url: string = matching_assets[0].url;
   core.debug(
     `Found ${num_found} assets for ${process.platform} with version ${version.name}`
   );
@@ -53,13 +58,10 @@ async function getBinDirectoryFrom(tool_path: string): Promise<string> {
   if (process.platform === 'darwin') {
     // On MacOS the bin directory is hidden behind a few more folders
     // e.g. <tool_path>/cmake-3.16.2-Darwin-x86_64/CMake.app/Contents/bin/
-    return path.join(
-      tool_path,
-      root_dir_path[0],
-      'CMake.app',
-      'Contents',
-      'bin'
-    );
+    //   or <tool_path>/cmake-2.8.10-Darwin-x86_64/CMake 2.8-10.app/Contents/bin/
+    const base = path.join(tool_path, root_dir_path[0]);
+    const app_dir = await fsPromises.readdir(base);
+    return path.join(base, app_dir[0], 'Contents', 'bin');
   } else {
     return path.join(tool_path, root_dir_path[0], 'bin');
   }

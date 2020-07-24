@@ -1,4 +1,9 @@
-on: [push]
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
 
 jobs:
   action_tests:
@@ -7,6 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+        cmake_ver: [3.15.1, 2.8]
 
     steps:
     - name: Checkout
@@ -16,15 +22,14 @@ jobs:
       uses: ./
       id: setup
       with:
-        cmake-version: '3.15.1'
-        github-api-token: ${{ secrets.GITHUB_TOKEN }}
+        cmake-version: ${{ matrix.cmake_ver }}
 
     - name: Run cmake --version
       shell: bash
       run: |
         VERSION=`cmake --version`
         echo $VERSION
-        [[ "$VERSION" =~ "3.15.1" ]]
+        [[ "$VERSION" =~ "${{ matrix.cmake_ver }}" ]]
 
   unit_tests:
     runs-on: ${{ matrix.os }}
