@@ -39,7 +39,7 @@ const KNOWN_EXTENSIONS: { [key: string]: string } = {
   txt: 'text',
   asc: 'text',
   msi: 'package',
-  zip: 'archive'
+  zip: 'archive',
 };
 
 function extractFileTypeFrom(filename: string): string {
@@ -73,7 +73,7 @@ function convertToVersionInfo(versions: GitHubVersion[]): vi.VersionInfo[] {
         platform: extractPlatformFrom(a.name),
         arch: extractArchFrom(a.name),
         filetype: extractFileTypeFrom(a.name),
-        url: a.browser_download_url
+        url: a.browser_download_url,
       });
     });
     const sv_version = semver.coerce(v.tag_name);
@@ -83,7 +83,7 @@ function convertToVersionInfo(versions: GitHubVersion[]): vi.VersionInfo[] {
         url: v.url,
         name: sv_version.toString(),
         draft: v.draft,
-        prerelease: v.prerelease
+        prerelease: v.prerelease,
       });
     }
   });
@@ -96,8 +96,8 @@ function getHttpOptions(
 ): rest.IRequestOptions {
   let options: rest.IRequestOptions = {
     queryParameters: {
-      params: { page: page_number }
-    }
+      params: { page: page_number },
+    },
   };
   if (api_token) {
     options.additionalHeaders = { Authorization: 'token ' + api_token };

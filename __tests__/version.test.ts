@@ -18,7 +18,7 @@ describe('When a version is needed', () => {
       .replyWithFile(200, path.join(dataPath, 'releases.json'), {
         'Content-Type': 'application/json',
         Link:
-          '<...releases?page=2>; rel="next", <...releases?page=2>; rel="last"'
+          '<...releases?page=2>; rel="next", <...releases?page=2>; rel="last"',
       });
     // Releases file 2 contains version info for:
     // 2.4.8, 2.6.4, 2.8.10.2, 2.8.12.2
@@ -30,7 +30,7 @@ describe('When a version is needed', () => {
       .replyWithFile(200, path.join(dataPath, 'releases2.json'), {
         'Content-Type': 'application/json',
         Link:
-          '<...releases?page=1>; rel="prev", <...releases?page=2>; rel="last"'
+          '<...releases?page=1>; rel="prev", <...releases?page=2>; rel="last"',
       });
   });
   afterEach(() => {
@@ -90,13 +90,13 @@ describe('When api token is required', () => {
   beforeEach(() => {
     nock('https://api.github.com', {
       reqheaders: {
-        Authorization: 'token secret_token'
-      }
+        Authorization: 'token secret_token',
+      },
     })
       .get('/repos/Kitware/CMake/releases')
       .query({ page: 1 })
       .replyWithFile(200, path.join(dataPath, 'releases.json'), {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       });
     nock('https://api.github.com')
       .get('/repos/Kitware/CMake/releases')

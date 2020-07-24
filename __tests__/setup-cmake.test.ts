@@ -25,26 +25,26 @@ test('Download uses correct platform url', async () => {
         platform: 'darwin',
         arch: 'x86_64',
         filetype: 'archive',
-        url: 'https://fakeaddress.com/cmake-Darwin-x86_64.tar.gz'
+        url: 'https://fakeaddress.com/cmake-Darwin-x86_64.tar.gz',
       },
       {
         name: 'cmake-Linux-x86_64.tar.gz',
         platform: 'linux',
         arch: 'x86_64',
         filetype: 'archive',
-        url: 'https://fakeaddress.com/cmake-Linux-x86_64.tar.gz'
+        url: 'https://fakeaddress.com/cmake-Linux-x86_64.tar.gz',
       },
       {
         name: 'cmake-win32-x86_64.zip',
         platform: 'win32',
         arch: 'x86_64',
         filetype: 'archive',
-        url: 'https://fakeaddress.com/cmake-win32-x86_64.zip'
-      }
+        url: 'https://fakeaddress.com/cmake-win32-x86_64.zip',
+      },
     ],
     url: '',
     draft: false,
-    prerelease: false
+    prerelease: false,
   };
   nock.disableNetConnect();
   const darwin_nock = nock('https://fakeaddress.com')
