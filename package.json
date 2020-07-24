@@ -9,7 +9,7 @@
   },
   "scripts": {
     "package": "ncc build src/index.ts -m -o dist",
-    "format": "prettier --write **/*.ts __tests__/**/*.js",
+    "format": "prettier --write **/*.ts",
     "prepare": "npm run format && npm run package",
     "test": "jest"
   },
@@ -21,23 +21,23 @@
   "author": "John Lawson",
   "license": "BSD-3-Clause-Clear",
   "dependencies": {
-    "@actions/core": "^1.2.3",
-    "@actions/tool-cache": "^1.3.3",
-    "semver": "^6.3.0",
+    "@actions/core": "^1.2.4",
+    "@actions/tool-cache": "^1.6.0",
+    "semver": "^7.3.2",
     "typed-rest-client": "^1.7.3"
   },
   "devDependencies": {
-    "@actions/github": "^2.1.1",
+    "@actions/github": "^4.0.0",
     "@actions/io": "^1.0.2",
-    "@types/jest": "^24.9.1",
-    "@types/semver": "^6.2.1",
-    "@zeit/ncc": "^0.21.1",
+    "@types/jest": "^26.0.7",
+    "@types/semver": "^7.3.1",
+    "@zeit/ncc": "^0.22.3",
     "husky": "^3.1.0",
-    "jest": "^25.2.4",
-    "nock": "^12.0.3",
-    "prettier": "^1.19.1",
-    "ts-jest": "^25.3.0",
-    "typescript": "^3.8.3"
+    "jest": "^26.1.0",
+    "nock": "^13.0.2",
+    "prettier": "^2.0.5",
+    "ts-jest": "^26.1.3",
+    "typescript": "^3.9.7"
   },
   "jest": {
     "testEnvironment": "node",
