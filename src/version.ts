@@ -54,7 +54,7 @@ function extractFileTypeFrom(filename: string): string {
 function extractArchFrom(filename: string): string {
   if (filename.match(/x86_64/)) {
     return 'x86_64';
-  } else if (filename.match(/universal/) {
+  } else if (filename.match(/universal/)) {
     return 'x86_64';
   } else if (filename.match(/x86/)) {
     return 'x86';
