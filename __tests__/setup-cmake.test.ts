@@ -155,3 +155,60 @@ describe('When using version 3.19.2 on macos', () => {
     });
   });
 });
+
+describe('When using version 2.8 on macos', () => {
+  // The Darwin-universal package is actually only 32 bit, whereas we need the
+  // 64 bit version. We also need to consider 'universal' packages to be
+  // compatible as the newer 3.19+ packages are also universal.
+  const macos_version: vi.VersionInfo = {
+    name: '2.8.12',
+    assets: [
+      {
+        name: 'cmake-2.8.12.2-Darwin-universal.tar.gz',
+        platform: 'darwin',
+        arch: 'x86_64',
+        filetype: 'archive',
+        url: 'https://fakeaddress.com/cmake-2.8.12.2-Darwin-universal.tar.gz',
+      },
+      {
+        name: 'cmake-2.8.12.2-Darwin64-universal.tar.gz',
+        platform: 'darwin',
+        arch: 'x86_64',
+        filetype: 'archive',
+        url: 'https://fakeaddress.com/cmake-2.8.12.2-Darwin64-universal.tar.gz',
+      },
+    ],
+    url: '',
+    draft: false,
+    prerelease: false,
+  };
+
+  beforeEach(() => {
+    nock.disableNetConnect();
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+    nock.enableNetConnect();
+  });
+
+  it('downloads the 64 bit archive', async () => {
+    const orig_platform: string = process.platform;
+    Object.defineProperty(process, 'platform', {
+      value: 'darwin',
+    });
+    expect(process.platform).toBe('darwin');
+    const darwin_nock = nock('https://fakeaddress.com')
+      .get('/cmake-2.8.12.2-Darwin-universal.tar.gz')
+      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+    const darwin64_nock = nock('https://fakeaddress.com')
+      .get('/cmake-2.8.12.2-Darwin64-universal.tar.gz')
+      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+    await setup.addCMakeToToolCache(macos_version);
+    expect(darwin_nock.isDone()).toBe(false);
+    expect(darwin64_nock.isDone()).toBe(true);
+    Object.defineProperty(process, 'platform', {
+      value: orig_platform,
+    });
+  });
+});
