@@ -19,7 +19,7 @@ function getURL(version: vi.VersionInfo): string {
   if (num_found > 1) {
     // If there are multiple assets it is likely to be because there are MacOS
     // builds for PPC, x86 and x86_64.
-    matching_assets = matching_assets.filter((a) => a.url.match('64'));
+    matching_assets = matching_assets.filter((a) => a.arch === 'x86_64');
   }
   const asset_url: string = matching_assets[0].url;
   core.debug(

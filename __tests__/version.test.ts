@@ -122,3 +122,63 @@ describe('When api token is required', () => {
     );
   });
 });
+
+describe('When using macos 3.19.2 release', () => {
+  const releases = {
+    tag_name: 'v3.19.2',
+    assets: [
+      {
+        name: 'cmake-3.19.2-Linux-x86_64.tar.gz',
+        browser_download_url:
+          'https://fakeaddress/cmake-3.19.2-Linux-x86_64.tar.gz',
+      },
+      {
+        name: 'cmake-3.19.2-macos-universal.dmg',
+        browser_download_url:
+          'https://fakeaddress.com/cmake-3.19.2-macos-universal.dmg',
+      },
+      {
+        name: 'cmake-3.19.2-macos-universal.tar.gz',
+        browser_download_url:
+          'https://fakeaddress.com/cmake-3.19.2-macos-universal.tar.gz',
+      },
+    ],
+  };
+
+  beforeEach(() => {
+    nock.disableNetConnect();
+    nock('https://api.github.com')
+      .get('/repos/Kitware/CMake/releases')
+      .query({ page: 1 })
+      .reply(200, releases);
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+    nock.enableNetConnect();
+  });
+
+  it('correctly parses the version', async () => {
+    const version_info = await version.getAllVersionInfo();
+    const selected = await version.getLatestMatching('3.x', version_info);
+    expect(selected.name).toMatch(/3.19.2/);
+  });
+
+  it('correctly parses the universal macos archive', async () => {
+    const version_info = await version.getAllVersionInfo();
+    const selected = await version.getLatestMatching('3.x', version_info);
+    const assets = selected.assets;
+    const macos = assets.filter(
+      (a) => a.platform === 'darwin' && a.filetype === 'archive'
+    );
+    expect(macos.length).toBe(1);
+    const macosAsset = macos[0];
+    expect(macosAsset).toEqual({
+      name: 'cmake-3.19.2-macos-universal.tar.gz',
+      platform: 'darwin',
+      arch: 'x86_64',
+      filetype: 'archive',
+      url: 'https://fakeaddress.com/cmake-3.19.2-macos-universal.tar.gz',
+    });
+  });
+});
