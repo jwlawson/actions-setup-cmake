@@ -1,6 +1,7 @@
 const path = require('path');
 const nock = require('nock');
 
+const dataPath = path.join(__dirname, 'data');
 const cachePath = path.join(__dirname, 'CACHE');
 const tempPath = path.join(__dirname, 'TEMP');
 // Set temp and tool directories before importing (used to set global state)
@@ -16,7 +17,7 @@ afterEach(() => {
   fs.rmdirSync(tempPath, { recursive: true });
 });
 
-test('Download uses correct platform url', async () => {
+describe('When adding tool to cache', () => {
   const required_version: vi.VersionInfo = {
     name: '1.2.1',
     assets: [
@@ -46,33 +47,168 @@ test('Download uses correct platform url', async () => {
     draft: false,
     prerelease: false,
   };
-  nock.disableNetConnect();
-  const darwin_nock = nock('https://fakeaddress.com')
-    .get('/cmake-Darwin-x86_64.tar.gz')
-    .reply(200, { bazel_darwin: true });
-  const linux_nock = nock('https://fakeaddress.com')
-    .get('/cmake-Linux-x86_64.tar.gz')
-    .reply(200, { bazel_linux: true });
-  const windows_nock = nock('https://fakeaddress.com')
-    .get('/cmake-win32-x86_64.zip')
-    .reply(200, { bazel_windows: true });
 
-  // As we do not provide valid archives, the extract command will always fail
-  await expect(setup.addCMakeToToolCache(required_version)).rejects.toThrow();
-  if (process.platform === 'win32') {
-    expect(darwin_nock.isDone()).toBe(false);
-    expect(linux_nock.isDone()).toBe(false);
-    expect(windows_nock.isDone()).toBe(true);
-  } else if (process.platform === 'darwin') {
-    expect(darwin_nock.isDone()).toBe(true);
-    expect(linux_nock.isDone()).toBe(false);
-    expect(windows_nock.isDone()).toBe(false);
-  } else if (process.platform === 'linux') {
-    expect(darwin_nock.isDone()).toBe(false);
-    expect(linux_nock.isDone()).toBe(true);
-    expect(windows_nock.isDone()).toBe(false);
+  beforeEach(() => {
+    nock.disableNetConnect();
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+    nock.enableNetConnect();
+  });
+
+  async function checkDownloads(
+    platform: string,
+    darwin: boolean,
+    linux: boolean,
+    windows: boolean
+  ) {
+    const orig_platform: string = process.platform;
+    Object.defineProperty(process, 'platform', {
+      value: platform,
+    });
+    expect(process.platform).toBe(platform);
+
+    const darwin_nock = nock('https://fakeaddress.com')
+      .get('/cmake-Darwin-x86_64.tar.gz')
+      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+    const linux_nock = nock('https://fakeaddress.com')
+      .get('/cmake-Linux-x86_64.tar.gz')
+      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+    const windows_nock = nock('https://fakeaddress.com')
+      .get('/cmake-win32-x86_64.zip')
+      .replyWithFile(200, path.join(dataPath, 'empty.zip'));
+
+    await setup.addCMakeToToolCache(required_version);
+    expect(darwin_nock.isDone()).toBe(darwin);
+    expect(linux_nock.isDone()).toBe(linux);
+    expect(windows_nock.isDone()).toBe(windows);
+
+    Object.defineProperty(process, 'platform', {
+      value: orig_platform,
+    });
   }
 
-  nock.cleanAll();
-  nock.enableNetConnect();
+  it('downloads right archive on windows', async () => {
+    await checkDownloads('win32', false, false, true);
+  });
+
+  it('downloads right archive on macos', async () => {
+    await checkDownloads('darwin', true, false, false);
+  });
+
+  it('downloads right archive on linux', async () => {
+    await checkDownloads('linux', false, true, false);
+  });
+});
+
+describe('When using version 3.19.2 on macos', () => {
+  const macos_version: vi.VersionInfo = {
+    name: '3.19.2',
+    assets: [
+      {
+        name: 'cmake-3.19.2-macos-universal.dmg',
+        platform: 'darwin',
+        arch: 'x86_64',
+        filetype: 'package',
+        url: 'https://fakeaddress.com/cmake-3.19.2-macos-universal.dmg',
+      },
+      {
+        name: 'cmake-3.19.2-macos-universal.tar.gz',
+        platform: 'darwin',
+        arch: 'x86_64',
+        filetype: 'archive',
+        url: 'https://fakeaddress.com/cmake-3.19.2-macos-universal.tar.gz',
+      },
+    ],
+    url: '',
+    draft: false,
+    prerelease: false,
+  };
+
+  beforeEach(() => {
+    nock.disableNetConnect();
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+    nock.enableNetConnect();
+  });
+
+  it('downloads the macos archive', async () => {
+    const orig_platform: string = process.platform;
+    Object.defineProperty(process, 'platform', {
+      value: 'darwin',
+    });
+    expect(process.platform).toBe('darwin');
+    const package_nock = nock('https://fakeaddress.com')
+      .get('/cmake-3.19.2-macos-universal.dmg')
+      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+    const archive_nock = nock('https://fakeaddress.com')
+      .get('/cmake-3.19.2-macos-universal.tar.gz')
+      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+    await setup.addCMakeToToolCache(macos_version);
+    expect(package_nock.isDone()).toBe(false);
+    expect(archive_nock.isDone()).toBe(true);
+    Object.defineProperty(process, 'platform', {
+      value: orig_platform,
+    });
+  });
+});
+
+describe('When using version 2.8 on macos', () => {
+  // The Darwin-universal package is actually only 32 bit, whereas we need the
+  // 64 bit version. We also need to consider 'universal' packages to be
+  // compatible as the newer 3.19+ packages are also universal.
+  const macos_version: vi.VersionInfo = {
+    name: '2.8.12',
+    assets: [
+      {
+        name: 'cmake-2.8.12.2-Darwin-universal.tar.gz',
+        platform: 'darwin',
+        arch: 'x86_64',
+        filetype: 'archive',
+        url: 'https://fakeaddress.com/cmake-2.8.12.2-Darwin-universal.tar.gz',
+      },
+      {
+        name: 'cmake-2.8.12.2-Darwin64-universal.tar.gz',
+        platform: 'darwin',
+        arch: 'x86_64',
+        filetype: 'archive',
+        url: 'https://fakeaddress.com/cmake-2.8.12.2-Darwin64-universal.tar.gz',
+      },
+    ],
+    url: '',
+    draft: false,
+    prerelease: false,
+  };
+
+  beforeEach(() => {
+    nock.disableNetConnect();
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+    nock.enableNetConnect();
+  });
+
+  it('downloads the 64 bit archive', async () => {
+    const orig_platform: string = process.platform;
+    Object.defineProperty(process, 'platform', {
+      value: 'darwin',
+    });
+    expect(process.platform).toBe('darwin');
+    const darwin_nock = nock('https://fakeaddress.com')
+      .get('/cmake-2.8.12.2-Darwin-universal.tar.gz')
+      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+    const darwin64_nock = nock('https://fakeaddress.com')
+      .get('/cmake-2.8.12.2-Darwin64-universal.tar.gz')
+      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+    await setup.addCMakeToToolCache(macos_version);
+    expect(darwin_nock.isDone()).toBe(false);
+    expect(darwin64_nock.isDone()).toBe(true);
+    Object.defineProperty(process, 'platform', {
+      value: orig_platform,
+    });
+  });
 });

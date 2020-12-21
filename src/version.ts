@@ -23,7 +23,7 @@ interface GitHubVersion {
 function extractPlatformFrom(filename: string): string {
   if (filename.match(/Linux/)) {
     return 'linux';
-  } else if (filename.match(/Darwin/)) {
+  } else if (filename.match(/Darwin/) || filename.match(/macos/)) {
     return 'darwin';
   } else if (filename.match(/win32/)) {
     return 'win32';
@@ -53,6 +53,8 @@ function extractFileTypeFrom(filename: string): string {
 
 function extractArchFrom(filename: string): string {
   if (filename.match(/x86_64/)) {
+    return 'x86_64';
+  } else if (filename.match(/universal/)) {
     return 'x86_64';
   } else if (filename.match(/x86/)) {
     return 'x86';

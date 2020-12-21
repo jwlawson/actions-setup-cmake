@@ -18,7 +18,10 @@ function getURL(version: vi.VersionInfo): string {
   }
   if (num_found > 1) {
     // If there are multiple assets it is likely to be because there are MacOS
-    // builds for PPC, x86 and x86_64.
+    // builds for PPC, x86 and x86_64. Universal packages prevent parsing the
+    // architecture completely, so we need to match against the full url to
+    // differentiate between e.g. cmake-2.8.10.2-Darwin-universal.tar.gz and
+    // cmake-2.8.10.2-Darwin64-universal.tar.gz.
     matching_assets = matching_assets.filter((a) => a.url.match('64'));
   }
   const asset_url: string = matching_assets[0].url;
