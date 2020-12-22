@@ -1,0 +1,29 @@
+on:
+  schedule:
+    - cron:  '* 0 * * *'
+  workflow_dispatch:
+
+
+jobs:
+  latest_version:
+    runs-on: ${{ matrix.os }}
+    name: Test latest version
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Setup cmake
+      uses: ./
+      id: setup
+      with:
+        cmake-version: ''
+
+    - name: Run cmake --version
+      shell: bash
+      run: |
+        VERSION=`cmake --version`
+        echo $VERSION
