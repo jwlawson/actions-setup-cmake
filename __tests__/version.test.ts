@@ -182,3 +182,72 @@ describe('When using macos 3.19.2 release', () => {
     });
   });
 });
+
+describe('When providing multiple different archs', () => {
+  const releases = {
+    tag_name: 'v3.19.3',
+    assets: [
+      {
+        name: 'cmake-3.19.3-Linux-aarch64.tar.gz',
+        browser_download_url:
+          'https://fakeaddress.com/cmake-3.19.3-Linux-aarch64.tar.gz',
+      },
+      {
+        name: 'cmake-3.19.3-Linux-x86_64.tar.gz',
+        browser_download_url:
+          'https://fakeaddress.com/cmake-3.19.3-Linux-x86_64.tar.gz',
+      },
+    ],
+  };
+
+  beforeEach(() => {
+    nock.disableNetConnect();
+    nock('https://api.github.com')
+      .get('/repos/Kitware/CMake/releases')
+      .query({ page: 1 })
+      .reply(200, releases);
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+    nock.enableNetConnect();
+  });
+
+  it('correctly parses the version', async () => {
+    const version_info = await version.getAllVersionInfo();
+    const selected = await version.getLatestMatching('3.x', version_info);
+    expect(selected.name).toMatch(/3.19.3/);
+  });
+
+  it('correctly parses the x86 archive', async () => {
+    const version_info = await version.getAllVersionInfo();
+    const selected = await version.getLatestMatching('3.x', version_info);
+    const assets = selected.assets;
+    const macos = assets.filter((a) => a.arch === 'x86_64');
+    expect(macos.length).toBe(1);
+    const macosAsset = macos[0];
+    expect(macosAsset).toEqual({
+      name: 'cmake-3.19.3-Linux-x86_64.tar.gz',
+      platform: 'linux',
+      arch: 'x86_64',
+      filetype: 'archive',
+      url: 'https://fakeaddress.com/cmake-3.19.3-Linux-x86_64.tar.gz',
+    });
+  });
+
+  it('correctly parses the aarch86 archive', async () => {
+    const version_info = await version.getAllVersionInfo();
+    const selected = await version.getLatestMatching('3.x', version_info);
+    const assets = selected.assets;
+    const macos = assets.filter((a) => a.arch != 'x86_64');
+    expect(macos.length).toBe(1);
+    const macosAsset = macos[0];
+    expect(macosAsset).toEqual({
+      name: 'cmake-3.19.3-Linux-aarch64.tar.gz',
+      platform: 'linux',
+      arch: '',
+      filetype: 'archive',
+      url: 'https://fakeaddress.com/cmake-3.19.3-Linux-aarch64.tar.gz',
+    });
+  });
+});

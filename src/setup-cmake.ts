@@ -8,7 +8,12 @@ const PACKAGE_NAME: string = 'cmake';
 
 function getURL(version: vi.VersionInfo): string {
   var matching_assets: vi.AssetInfo[] = version.assets
-    .filter((a) => a.platform === process.platform && a.filetype === 'archive')
+    .filter(
+      (a) =>
+        a.platform === process.platform &&
+        a.filetype === 'archive' &&
+        a.arch === 'x86_64'
+    )
     .sort();
   const num_found: number = matching_assets.length;
   if (num_found == 0) {
