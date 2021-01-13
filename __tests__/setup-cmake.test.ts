@@ -156,11 +156,13 @@ describe('When using version 3.19.2 on macos', () => {
   });
 });
 
-describe('When using version 2.8 on macos', () => {
+describe('When using version 2.8', () => {
   // The Darwin-universal package is actually only 32 bit, whereas we need the
   // 64 bit version. We also need to consider 'universal' packages to be
   // compatible as the newer 3.19+ packages are also universal.
-  const macos_version: vi.VersionInfo = {
+  // On the other hand, the Linux package is 32 bit and there is no 64 bit
+  // package, so we should select the 32 bit package instead of failing.
+  const version: vi.VersionInfo = {
     name: '2.8.12',
     assets: [
       {
@@ -177,6 +179,13 @@ describe('When using version 2.8 on macos', () => {
         filetype: 'archive',
         url: 'https://fakeaddress.com/cmake-2.8.12.2-Darwin64-universal.tar.gz',
       },
+      {
+        name: 'cmake-2.8.12.2-Linux-i386.tar.gz',
+        platform: 'linux',
+        arch: 'x86',
+        filetype: 'archive',
+        url: 'https://fakeaddress.com/cmake-2.8.12.2-Linux-i386.tar.gz',
+      },
     ],
     url: '',
     draft: false,
@@ -192,7 +201,7 @@ describe('When using version 2.8 on macos', () => {
     nock.enableNetConnect();
   });
 
-  it('downloads the 64 bit archive', async () => {
+  it('downloads the 64 bit archive on macos', async () => {
     const orig_platform: string = process.platform;
     Object.defineProperty(process, 'platform', {
       value: 'darwin',
@@ -204,9 +213,116 @@ describe('When using version 2.8 on macos', () => {
     const darwin64_nock = nock('https://fakeaddress.com')
       .get('/cmake-2.8.12.2-Darwin64-universal.tar.gz')
       .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
-    await setup.addCMakeToToolCache(macos_version);
+    await setup.addCMakeToToolCache(version);
     expect(darwin_nock.isDone()).toBe(false);
     expect(darwin64_nock.isDone()).toBe(true);
+    Object.defineProperty(process, 'platform', {
+      value: orig_platform,
+    });
+  });
+
+  it('downloads the 32 bit archive on linux', async () => {
+    const orig_platform: string = process.platform;
+    Object.defineProperty(process, 'platform', {
+      value: 'linux',
+    });
+    expect(process.platform).toBe('linux');
+    const linux_nock = nock('https://fakeaddress.com')
+      .get('/cmake-2.8.12.2-Linux-i386.tar.gz')
+      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+
+    await setup.addCMakeToToolCache(version);
+    expect(linux_nock.isDone()).toBe(true);
+    Object.defineProperty(process, 'platform', {
+      value: orig_platform,
+    });
+  });
+});
+
+describe('Using version 3.19.3', () => {
+  // Version 3.19.3 introduced aarch64 packages for Linux that were not
+  // correctly considered when selecting which package to use.
+  const version: vi.VersionInfo = {
+    name: '3.9.13',
+    assets: [
+      {
+        name: 'cmake-3.19.3-Linux-aarch64.tar.gz',
+        platform: 'linux',
+        arch: '',
+        filetype: 'archive',
+        url: 'https://fakeaddress.com/cmake-3.19.3-Linux-aarch64.tar.gz',
+      },
+      {
+        name: 'cmake-3.19.3-Linux-x86_64.tar.gz',
+        platform: 'linux',
+        arch: 'x86_64',
+        filetype: 'archive',
+        url: 'https://fakeaddress.com/cmake-3.19.3-Linux-x86_64.tar.gz',
+      },
+      {
+        name: 'cmake-3.19.3-macos-universal.tar.gz',
+        platform: 'darwin',
+        arch: 'x86_64',
+        filetype: 'archive',
+        url: 'https://fakeaddress.com/cmake-3.19.3-macos-universal.tar.gz',
+      },
+      {
+        name: 'cmake-3.19.3-macos10.10-universal.tar.gz',
+        platform: 'darwin',
+        arch: 'x86_64',
+        filetype: 'archive',
+        url: 'https://fakeaddress.com/cmake-3.19.3-macos-universal.tar.gz',
+      },
+    ],
+    url: '',
+    draft: false,
+    prerelease: false,
+  };
+
+  beforeEach(() => {
+    nock.disableNetConnect();
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+    nock.enableNetConnect();
+  });
+
+  it('downloads the x86_64 archive on linux', async () => {
+    const orig_platform: string = process.platform;
+    Object.defineProperty(process, 'platform', {
+      value: 'linux',
+    });
+    expect(process.platform).toBe('linux');
+    const x86_nock = nock('https://fakeaddress.com')
+      .get('/cmake-3.19.3-Linux-x86_64.tar.gz')
+      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+    const aarch64_nock = nock('https://fakeaddress.com')
+      .get('/cmake-3.19.3-Linux-aarch64.tar.gz')
+      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+    await setup.addCMakeToToolCache(version);
+    expect(x86_nock.isDone()).toBe(true);
+    expect(aarch64_nock.isDone()).toBe(false);
+    Object.defineProperty(process, 'platform', {
+      value: orig_platform,
+    });
+  });
+
+  it('downloads the first archive on macos', async () => {
+    const orig_platform: string = process.platform;
+    Object.defineProperty(process, 'platform', {
+      value: 'darwin',
+    });
+    expect(process.platform).toBe('darwin');
+    const first_nock = nock('https://fakeaddress.com')
+      .get('/cmake-3.19.3-macos-universal.tar.gz')
+      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+    const second_nock = nock('https://fakeaddress.com')
+      .get('/cmake-3.19.3-macos10.10-universal.tar.gz')
+      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+    await setup.addCMakeToToolCache(version);
+    expect(first_nock.isDone()).toBe(true);
+    expect(second_nock.isDone()).toBe(false);
     Object.defineProperty(process, 'platform', {
       value: orig_platform,
     });

@@ -7,24 +7,39 @@ import * as vi from './version-info';
 const PACKAGE_NAME: string = 'cmake';
 
 function getURL(version: vi.VersionInfo): string {
-  var matching_assets: vi.AssetInfo[] = version.assets
+  const assets_for_platform: vi.AssetInfo[] = version.assets
     .filter((a) => a.platform === process.platform && a.filetype === 'archive')
     .sort();
-  const num_found: number = matching_assets.length;
-  if (num_found == 0) {
-    throw new Error(
-      `Could not find ${process.platform} asset for cmake version ${version.name}`
-    );
+  var matching_assets: vi.AssetInfo[] = assets_for_platform.filter(
+    (a) => a.arch === 'x86_64'
+  );
+  if (matching_assets.length == 0) {
+    // Fall back to looking for x86 packages if there are no x86_64 ones.
+    matching_assets = assets_for_platform.filter((a) => a.arch === 'x86');
+
+    if (matching_assets.length == 0) {
+      // If there are no x86_64 or x86 packages then give up.
+      throw new Error(
+        `Could not find ${process.platform} asset for cmake version ${version.name}`
+      );
+    }
   }
-  if (num_found > 1) {
+  if (matching_assets.length > 1) {
+    core.warning(`Found ${matching_assets.length} matching packages.`);
     // If there are multiple assets it is likely to be because there are MacOS
     // builds for PPC, x86 and x86_64. Universal packages prevent parsing the
     // architecture completely, so we need to match against the full url to
     // differentiate between e.g. cmake-2.8.10.2-Darwin-universal.tar.gz and
     // cmake-2.8.10.2-Darwin64-universal.tar.gz.
-    matching_assets = matching_assets.filter((a) => a.url.match('64'));
+    // Check to see if this narrows down the options or just removes all options.
+    // Prefer to use all previous matches when none of them include '64'.
+    const possible_assets = matching_assets.filter((a) => a.url.match('64'));
+    if (possible_assets.length > 0) {
+      matching_assets = possible_assets;
+    }
   }
   const asset_url: string = matching_assets[0].url;
+  const num_found: number = matching_assets.length;
   core.debug(
     `Found ${num_found} assets for ${process.platform} with version ${version.name}`
   );

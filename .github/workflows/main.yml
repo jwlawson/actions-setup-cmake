@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        cmake_ver: [3.19.2, 3.15.1, 2.8]
+        cmake_ver: [3.19.3, 3.15.1, 2.8]
 
     steps:
     - name: Checkout
