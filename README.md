@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup cmake
-      uses: jwlawson/actions-setup-cmake@v1.5
+      uses: jwlawson/actions-setup-cmake@v1.6
       with:
         cmake-version: '3.16.x'
     - name: Use cmake
