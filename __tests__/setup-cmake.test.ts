@@ -220,18 +220,18 @@ describe('Using version 3.19.3 on Linux', () => {
     name: '3.9.13',
     assets: [
       {
-        name: 'cmake-3.19.3-Linux-x86_64.tar.gz',
-        platform: 'linux',
-        arch: 'x86_64',
-        filetype: 'archive',
-        url: 'https://fakeaddress.com/cmake-3.19.3-Linux-x86_64.tar.gz',
-      },
-      {
         name: 'cmake-3.19.3-Linux-aarch64.tar.gz',
         platform: 'linux',
         arch: '',
         filetype: 'archive',
         url: 'https://fakeaddress.com/cmake-3.19.3-Linux-aarch64.tar.gz',
+      },
+      {
+        name: 'cmake-3.19.3-Linux-x86_64.tar.gz',
+        platform: 'linux',
+        arch: 'x86_64',
+        filetype: 'archive',
+        url: 'https://fakeaddress.com/cmake-3.19.3-Linux-x86_64.tar.gz',
       },
     ],
     url: '',
