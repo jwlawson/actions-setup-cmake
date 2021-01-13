@@ -25,14 +25,17 @@ function getURL(version: vi.VersionInfo): string {
     }
   }
   if (matching_assets.length > 1) {
+    core.warning(`Found ${matching_assets.length} matching packages.`);
     // If there are multiple assets it is likely to be because there are MacOS
     // builds for PPC, x86 and x86_64. Universal packages prevent parsing the
     // architecture completely, so we need to match against the full url to
     // differentiate between e.g. cmake-2.8.10.2-Darwin-universal.tar.gz and
     // cmake-2.8.10.2-Darwin64-universal.tar.gz.
-    matching_assets = matching_assets.filter((a) => a.url.match('64'));
-    if (matching_assets.length > 1) {
-      core.warning(`Found ${matching_assets.length} matching packages.`);
+    // Check to see if this narrows down the options or just removes all options.
+    // Prefer to use all previous matches when none of them include '64'.
+    const possible_assets = matching_assets.filter((a) => a.url.match('64'));
+    if (possible_assets.length > 0) {
+      matching_assets = possible_assets;
     }
   }
   const asset_url: string = matching_assets[0].url;
