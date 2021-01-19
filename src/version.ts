@@ -101,8 +101,9 @@ function getHttpOptions(
       params: { page: page_number },
     },
   };
+  options.additionalHeaders = { Accept: 'application/vnd.github.v3+json' };
   if (api_token) {
-    options.additionalHeaders = { Authorization: 'token ' + api_token };
+    options.additionalHeaders.Authorization = 'token ' + api_token;
   }
   return options;
 }
