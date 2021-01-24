@@ -136,19 +136,17 @@ export async function getAllVersionInfo(
   return versions;
 }
 
-async function getLatest(
-  version_list: vi.VersionInfo[]
-): Promise<vi.VersionInfo> {
+function getLatest(version_list: vi.VersionInfo[]): vi.VersionInfo {
   const sorted_versions: vi.VersionInfo[] = version_list.sort((a, b) =>
     semver.rcompare(a.name, b.name)
   );
   return sorted_versions[0];
 }
 
-export async function getLatestMatching(
+export function getLatestMatching(
   version: string,
   version_list: vi.VersionInfo[]
-): Promise<vi.VersionInfo> {
+): vi.VersionInfo {
   let matching_versions = version_list
     .filter((v) => !v.draft && !v.prerelease)
     .filter((v) => semver.satisfies(v.name, version));

@@ -62,17 +62,17 @@ describe('When a version is needed', () => {
     const selected = await version.getLatestMatching('3.x', version_info);
     expect(selected.name).toMatch(/3.16.2/);
   });
-  it('non-existant full version throws', async () => {
+  it('non-existent full version throws', async () => {
     const version_info = await version.getAllVersionInfo();
-    await expect(
-      version.getLatestMatching('100.0.0', version_info)
-    ).rejects.toThrow('Unable to find version matching 100.0.0');
+    expect(() => {
+      version.getLatestMatching('100.0.0', version_info);
+    }).toThrow('Unable to find version matching 100.0.0');
   });
-  it('non-existant part version throws', async () => {
+  it('non-existent part version throws', async () => {
     const version_info = await version.getAllVersionInfo();
-    await expect(
-      version.getLatestMatching('100.0.x', version_info)
-    ).rejects.toThrow('Unable to find version matching 100.0');
+    expect(() => {
+      version.getLatestMatching('100.0.x', version_info);
+    }).toThrow('Unable to find version matching 100.0');
   });
   it('versions on second page get chosen', async () => {
     const version_info = await version.getAllVersionInfo();
@@ -160,13 +160,13 @@ describe('When using macos 3.19.2 release', () => {
 
   it('correctly parses the version', async () => {
     const version_info = await version.getAllVersionInfo();
-    const selected = await version.getLatestMatching('3.x', version_info);
+    const selected = version.getLatestMatching('3.x', version_info);
     expect(selected.name).toMatch(/3.19.2/);
   });
 
   it('correctly parses the universal macos archive', async () => {
     const version_info = await version.getAllVersionInfo();
-    const selected = await version.getLatestMatching('3.x', version_info);
+    const selected = version.getLatestMatching('3.x', version_info);
     const assets = selected.assets;
     const macos = assets.filter(
       (a) => a.platform === 'darwin' && a.filetype === 'archive'
@@ -215,13 +215,13 @@ describe('When providing multiple different archs', () => {
 
   it('correctly parses the version', async () => {
     const version_info = await version.getAllVersionInfo();
-    const selected = await version.getLatestMatching('3.x', version_info);
+    const selected = version.getLatestMatching('3.x', version_info);
     expect(selected.name).toMatch(/3.19.3/);
   });
 
   it('correctly parses the x86 archive', async () => {
     const version_info = await version.getAllVersionInfo();
-    const selected = await version.getLatestMatching('3.x', version_info);
+    const selected = version.getLatestMatching('3.x', version_info);
     const assets = selected.assets;
     const macos = assets.filter((a) => a.arch === 'x86_64');
     expect(macos.length).toBe(1);
@@ -237,7 +237,7 @@ describe('When providing multiple different archs', () => {
 
   it('correctly parses the aarch86 archive', async () => {
     const version_info = await version.getAllVersionInfo();
-    const selected = await version.getLatestMatching('3.x', version_info);
+    const selected = version.getLatestMatching('3.x', version_info);
     const assets = selected.assets;
     const macos = assets.filter((a) => a.arch != 'x86_64');
     expect(macos.length).toBe(1);
