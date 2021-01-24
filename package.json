@@ -1,6 +1,6 @@
 {
   "name": "actions-setup-cmake",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "GitHub action to setup cmake",
   "main": "dist/index.js",
   "repository": {
@@ -34,7 +34,7 @@
     "@zeit/ncc": "^0.22.3",
     "husky": "^3.1.0",
     "jest": "^26.1.0",
-    "nock": "^13.0.2",
+    "nock": "^13.0.6",
     "prettier": "^2.0.5",
     "ts-jest": "^26.1.3",
     "typescript": "^4.1.3"
