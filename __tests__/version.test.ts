@@ -4,7 +4,7 @@ const dataPath = path.join(__dirname, 'data');
 
 import * as version from '../src/version';
 
-describe('When a version is needed', () => {
+describe('Pulling from multipage results with Link header', () => {
   beforeEach(() => {
     nock.disableNetConnect();
     // Releases file contains version info for:
@@ -14,11 +14,10 @@ describe('When a version is needed', () => {
     // 3.13.5
     nock('https://api.github.com')
       .get('/repos/Kitware/CMake/releases')
-      .query({ page: 1 })
       .replyWithFile(200, path.join(dataPath, 'releases.json'), {
         'Content-Type': 'application/json',
         Link:
-          '<...releases?page=2>; rel="next", <...releases?page=2>; rel="last"',
+          '<https://api.github.com/repos/Kitware/CMake/releases?page=2>; rel="next", <https://api.github.com/repos/Kitware/CMake/releases?page=2>; rel="last"',
       });
     // Releases file 2 contains version info for:
     // 2.4.8, 2.6.4, 2.8.10.2, 2.8.12.2
@@ -30,59 +29,103 @@ describe('When a version is needed', () => {
       .replyWithFile(200, path.join(dataPath, 'releases2.json'), {
         'Content-Type': 'application/json',
         Link:
-          '<...releases?page=1>; rel="prev", <...releases?page=2>; rel="last"',
+          '<https://api.github.com/repos/Kitware/CMake/releases?page=1>; rel="first", <https://api.github.com/repos/Kitware/CMake/releases?page=1>; rel="prev"',
       });
   });
   afterEach(() => {
     nock.cleanAll();
     nock.enableNetConnect();
   });
-  it('latest version is correctly parsed', async () => {
+  it('parses the latest version', async () => {
     const version_info = await version.getAllVersionInfo();
-    const latest = await version.getLatestMatching('', version_info);
+    const latest = version.getLatestMatching('', version_info);
     expect(latest.name).toMatch(/3.16.2/);
   });
-  it('exact version is selected', async () => {
+  it('selects an exact version for full release', async () => {
     const version_info = await version.getAllVersionInfo();
-    const selected = await version.getLatestMatching('3.15.5', version_info);
+    const selected = version.getLatestMatching('3.15.5', version_info);
     expect(selected.name).toMatch(/3.15.5/);
   });
-  it('latest version is selected for provided minor release', async () => {
+  it('selects the latest version for provided minor release', async () => {
     const version_info = await version.getAllVersionInfo();
-    const selected = await version.getLatestMatching('3.15', version_info);
+    const selected = version.getLatestMatching('3.15', version_info);
     expect(selected.name).toMatch(/3.15.6/);
   });
-  it('latest version is selected for provided minor release with x', async () => {
+  it('selects the latest version for provided minor release with x', async () => {
     const version_info = await version.getAllVersionInfo();
-    const selected = await version.getLatestMatching('3.15.x', version_info);
+    const selected = version.getLatestMatching('3.15.x', version_info);
     expect(selected.name).toMatch(/3.15.6/);
   });
-  it('latest version is selected for provided major release with x', async () => {
+  it('selects the latest version for provided major release with x', async () => {
     const version_info = await version.getAllVersionInfo();
-    const selected = await version.getLatestMatching('3.x', version_info);
+    const selected = version.getLatestMatching('3.x', version_info);
     expect(selected.name).toMatch(/3.16.2/);
   });
-  it('non-existent full version throws', async () => {
+  it('throws on non-existent full version', async () => {
     const version_info = await version.getAllVersionInfo();
     expect(() => {
       version.getLatestMatching('100.0.0', version_info);
     }).toThrow('Unable to find version matching 100.0.0');
   });
-  it('non-existent part version throws', async () => {
+  it('throws on non-existent part version', async () => {
     const version_info = await version.getAllVersionInfo();
     expect(() => {
       version.getLatestMatching('100.0.x', version_info);
     }).toThrow('Unable to find version matching 100.0');
   });
-  it('versions on second page get chosen', async () => {
+  it('select versions on second page', async () => {
     const version_info = await version.getAllVersionInfo();
-    const selected = await version.getLatestMatching('2.x', version_info);
+    const selected = version.getLatestMatching('2.x', version_info);
     expect(selected.name).toMatch(/2.8.12/);
   });
-  it('extra numbers in version get ignored', async () => {
+  it('ignores extra numbers in version', async () => {
     const version_info = await version.getAllVersionInfo();
-    const selected = await version.getLatestMatching('2.8.10', version_info);
+    const selected = version.getLatestMatching('2.8.10', version_info);
     expect(selected.name).toMatch(/2.8.10/);
+  });
+});
+
+describe('Pulling from multipage results without Link header', () => {
+  // When the Link header is not available, we still want to be able to parse
+  // all pages. This could be done by iterating over all possible pages until
+  // we get no further results.
+  beforeEach(() => {
+    nock.disableNetConnect();
+    nock('https://api.github.com')
+      .get('/repos/Kitware/CMake/releases')
+      .replyWithFile(200, path.join(dataPath, 'releases.json'), {
+        'Content-Type': 'application/json',
+      });
+    nock('https://api.github.com')
+      .get('/repos/Kitware/CMake/releases')
+      .query({ page: 2 })
+      .replyWithFile(200, path.join(dataPath, 'releases2.json'), {
+        'Content-Type': 'application/json',
+      });
+    nock('https://api.github.com')
+      .get('/repos/Kitware/CMake/releases')
+      .query({ page: 3 })
+      .reply(200, []);
+  });
+  afterEach(() => {
+    nock.cleanAll();
+    nock.enableNetConnect();
+  });
+  it('selects exact version from first page', async () => {
+    const version_info = await version.getAllVersionInfo();
+    const selected = version.getLatestMatching('3.15.5', version_info);
+    expect(selected.name).toMatch(/3.15.5/);
+  });
+  it('throws on non-existent full version', async () => {
+    const version_info = await version.getAllVersionInfo();
+    expect(() => {
+      version.getLatestMatching('100.0.0', version_info);
+    }).toThrow('Unable to find version matching 100.0.0');
+  });
+  it('selects versions on second page', async () => {
+    const version_info = await version.getAllVersionInfo();
+    const selected = version.getLatestMatching('2.x', version_info);
+    expect(selected.name).toMatch(/2.8.12/);
   });
 });
 
@@ -94,14 +137,16 @@ describe('When api token is required', () => {
       },
     })
       .get('/repos/Kitware/CMake/releases')
-      .query({ page: 1 })
       .replyWithFile(200, path.join(dataPath, 'releases.json'), {
         'Content-Type': 'application/json',
       });
     nock('https://api.github.com')
       .get('/repos/Kitware/CMake/releases')
-      .query({ page: 1 })
       .replyWithError('Invalid API token');
+    nock('https://api.github.com')
+      .get('/repos/Kitware/CMake/releases')
+      .query({ page: 2 })
+      .reply(200, []);
   });
   afterEach(() => {
     nock.cleanAll();
@@ -124,33 +169,38 @@ describe('When api token is required', () => {
 });
 
 describe('When using macos 3.19.2 release', () => {
-  const releases = {
-    tag_name: 'v3.19.2',
-    assets: [
-      {
-        name: 'cmake-3.19.2-Linux-x86_64.tar.gz',
-        browser_download_url:
-          'https://fakeaddress/cmake-3.19.2-Linux-x86_64.tar.gz',
-      },
-      {
-        name: 'cmake-3.19.2-macos-universal.dmg',
-        browser_download_url:
-          'https://fakeaddress.com/cmake-3.19.2-macos-universal.dmg',
-      },
-      {
-        name: 'cmake-3.19.2-macos-universal.tar.gz',
-        browser_download_url:
-          'https://fakeaddress.com/cmake-3.19.2-macos-universal.tar.gz',
-      },
-    ],
-  };
+  const releases = [
+    {
+      tag_name: 'v3.19.2',
+      assets: [
+        {
+          name: 'cmake-3.19.2-Linux-x86_64.tar.gz',
+          browser_download_url:
+            'https://fakeaddress/cmake-3.19.2-Linux-x86_64.tar.gz',
+        },
+        {
+          name: 'cmake-3.19.2-macos-universal.dmg',
+          browser_download_url:
+            'https://fakeaddress.com/cmake-3.19.2-macos-universal.dmg',
+        },
+        {
+          name: 'cmake-3.19.2-macos-universal.tar.gz',
+          browser_download_url:
+            'https://fakeaddress.com/cmake-3.19.2-macos-universal.tar.gz',
+        },
+      ],
+    },
+  ];
 
   beforeEach(() => {
     nock.disableNetConnect();
     nock('https://api.github.com')
       .get('/repos/Kitware/CMake/releases')
-      .query({ page: 1 })
       .reply(200, releases);
+    nock('https://api.github.com')
+      .get('/repos/Kitware/CMake/releases')
+      .query({ page: 2 })
+      .reply(200, []);
   });
 
   afterEach(() => {
@@ -184,28 +234,33 @@ describe('When using macos 3.19.2 release', () => {
 });
 
 describe('When providing multiple different archs', () => {
-  const releases = {
-    tag_name: 'v3.19.3',
-    assets: [
-      {
-        name: 'cmake-3.19.3-Linux-aarch64.tar.gz',
-        browser_download_url:
-          'https://fakeaddress.com/cmake-3.19.3-Linux-aarch64.tar.gz',
-      },
-      {
-        name: 'cmake-3.19.3-Linux-x86_64.tar.gz',
-        browser_download_url:
-          'https://fakeaddress.com/cmake-3.19.3-Linux-x86_64.tar.gz',
-      },
-    ],
-  };
+  const releases = [
+    {
+      tag_name: 'v3.19.3',
+      assets: [
+        {
+          name: 'cmake-3.19.3-Linux-aarch64.tar.gz',
+          browser_download_url:
+            'https://fakeaddress.com/cmake-3.19.3-Linux-aarch64.tar.gz',
+        },
+        {
+          name: 'cmake-3.19.3-Linux-x86_64.tar.gz',
+          browser_download_url:
+            'https://fakeaddress.com/cmake-3.19.3-Linux-x86_64.tar.gz',
+        },
+      ],
+    },
+  ];
 
   beforeEach(() => {
     nock.disableNetConnect();
     nock('https://api.github.com')
       .get('/repos/Kitware/CMake/releases')
-      .query({ page: 1 })
       .reply(200, releases);
+    nock('https://api.github.com')
+      .get('/repos/Kitware/CMake/releases')
+      .query({ page: 2 })
+      .reply(200, []);
   });
 
   afterEach(() => {

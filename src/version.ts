@@ -1,4 +1,5 @@
 import * as rest from 'typed-rest-client/RestClient';
+import * as core from '@actions/core';
 import * as semver from 'semver';
 import * as vi from './version-info';
 
@@ -94,44 +95,86 @@ function convertToVersionInfo(versions: GitHubVersion[]): vi.VersionInfo[] {
 
 function getHttpOptions(
   api_token: string,
-  page_number: number
+  page_number: number = 1
 ): rest.IRequestOptions {
-  let options: rest.IRequestOptions = {
-    queryParameters: {
-      params: { page: page_number },
-    },
-  };
+  let options: rest.IRequestOptions = {};
   options.additionalHeaders = { Accept: 'application/vnd.github.v3+json' };
+  if (page_number > 1) {
+    options.queryParameters = { params: { page: page_number } };
+  }
   if (api_token) {
     options.additionalHeaders.Authorization = 'token ' + api_token;
   }
   return options;
 }
 
+// Parse the pagination Link header to get the next url.
+// The header has the form <...url...>; rel="...", <...>; rel="..."
+function getNextFromLink(link: string): string | undefined {
+  const rLink = /<(?<url>[A-Za-z0-9_?=.\/:-]*?)>; rel="(?<rel>\w*?)"/g;
+  let match;
+  while ((match = rLink.exec(link)) != null) {
+    if (match.groups && /next/.test(match.groups.rel)) {
+      return match.groups.url;
+    }
+  }
+  return;
+}
+
 export async function getAllVersionInfo(
   api_token: string = ''
 ): Promise<vi.VersionInfo[]> {
   const client = new rest.RestClient(USER_AGENT);
-  let cur_page = 1;
-  let raw_versions: GitHubVersion[] = [];
-  let has_next_page = true;
-  while (has_next_page) {
-    const options = getHttpOptions(api_token, cur_page);
-    const version_response = await client.get<GitHubVersion[]>(
-      VERSION_URL,
-      options
-    );
-    const headers: { link?: string } = version_response.headers;
-    if (headers.link && headers.link.match(/rel="next"/)) {
-      has_next_page = true;
-    } else {
-      has_next_page = false;
-    }
-    if (version_response.result) {
-      raw_versions = raw_versions.concat(version_response.result);
-    }
-    cur_page++;
+
+  // Fetch the first page of releases and use that to select the pagination
+  // method to use for all other pages.
+  const options = getHttpOptions(api_token);
+  const version_response = await client.get<GitHubVersion[]>(
+    VERSION_URL,
+    options
+  );
+  if (version_response.statusCode != 200 || !version_response.result) {
+    return [];
   }
+  let raw_versions = version_response.result;
+  // Try to use the Link headers for pagination. If these are not available,
+  // then fall back to checking all pages until an empty page of results is
+  // returned.
+  let headers: { link?: string } = version_response.headers;
+  if (headers.link) {
+    core.debug(`Using link headers for pagination`);
+    let next = getNextFromLink(headers.link);
+    while (next) {
+      const options = getHttpOptions(api_token);
+      const version_response = await client.get<GitHubVersion[]>(next, options);
+      if (version_response.statusCode != 200 || !version_response.result) {
+        break;
+      }
+      raw_versions = raw_versions.concat(version_response.result);
+      headers = version_response.headers;
+      if (!headers.link) {
+        break;
+      }
+      next = getNextFromLink(headers.link);
+    }
+  } else {
+    core.debug(`Using page count for pagination`);
+    const max_pages = 20;
+    let cur_page = 2;
+    while (cur_page <= max_pages) {
+      const options = getHttpOptions(api_token, cur_page);
+      const version_response = await client.get<GitHubVersion[]>(
+        VERSION_URL,
+        options
+      );
+      if (!version_response.result || version_response.result.length == 0) {
+        break;
+      }
+      raw_versions = raw_versions.concat(version_response.result);
+      cur_page++;
+    }
+  }
+  core.debug(`overall got ${raw_versions.length} versions`);
   const versions: vi.VersionInfo[] = convertToVersionInfo(raw_versions);
   return versions;
 }
