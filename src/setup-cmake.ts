@@ -10,9 +10,7 @@ function getURL(version: vi.VersionInfo): string {
   const assets_for_platform: vi.AssetInfo[] = version.assets
     .filter((a) => a.platform === process.platform && a.filetype === 'archive')
     .sort();
-  var matching_assets: vi.AssetInfo[] = assets_for_platform.filter(
-    (a) => a.arch === 'x86_64'
-  );
+  let matching_assets = assets_for_platform.filter((a) => a.arch === 'x86_64');
   if (matching_assets.length == 0) {
     // Fall back to looking for x86 packages if there are no x86_64 ones.
     matching_assets = assets_for_platform.filter((a) => a.arch === 'x86');

@@ -69,18 +69,15 @@ function extractArchFrom(filename: string): string {
 function convertToVersionInfo(versions: GitHubVersion[]): vi.VersionInfo[] {
   let result = new Array<vi.VersionInfo>();
   versions.map((v) => {
-    let assets = new Array<vi.AssetInfo>();
-    v.assets.map((a) => {
-      assets.push({
+    const sv_version = semver.coerce(v.tag_name);
+    if (sv_version) {
+      const assets = v.assets.map((a) => ({
         name: a.name,
         platform: extractPlatformFrom(a.name),
         arch: extractArchFrom(a.name),
         filetype: extractFileTypeFrom(a.name),
         url: a.browser_download_url,
-      });
-    });
-    const sv_version = semver.coerce(v.tag_name);
-    if (sv_version) {
+      }));
       result.push({
         assets: assets,
         url: v.url,
