@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        cmake_ver: [3.19.3, 3.15.1, 2.8]
+        cmake_ver: ['', '3.19.3', '3.15.1', '2.8']
 
     steps:
     - name: Checkout
@@ -27,10 +27,20 @@ jobs:
 
     - name: Run cmake --version
       shell: bash
+      if: matrix.cmake_ver != ''
       run: |
         VERSION=`cmake --version`
         echo $VERSION
         [[ "$VERSION" =~ "${{ matrix.cmake_ver }}" ]]
+
+    - name: Run cmake --version
+      # [[ "$VERSION" =~ "" ]] does not work as expected on macos, so don't
+      # do the test when using the latest cmake version
+      shell: bash
+      if: matrix.cmake_ver == ''
+      run: |
+        VERSION=`cmake --version`
+        echo $VERSION
 
   unit_tests:
     runs-on: ${{ matrix.os }}

@@ -22,11 +22,11 @@ interface GitHubVersion {
 }
 
 function extractPlatformFrom(filename: string): string {
-  if (filename.match(/Linux/)) {
+  if (filename.match(/Linux/) || filename.match(/linux/)) {
     return 'linux';
   } else if (filename.match(/Darwin/) || filename.match(/macos/)) {
     return 'darwin';
-  } else if (filename.match(/win32/)) {
+  } else if (filename.match(/win32/) || filename.match(/windows/)) {
     return 'win32';
   } else {
     return '';

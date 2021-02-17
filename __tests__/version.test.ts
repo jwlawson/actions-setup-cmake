@@ -306,3 +306,80 @@ describe('When providing multiple different archs', () => {
     });
   });
 });
+
+describe('When using the 3.20 release', () => {
+  // The 3.20 release changes the linux and windows filenames from
+  //  * cmake-3.20.0-Linux-x86_64 -> cmake-3.20.0-linux-x86_64
+  //  * cmake-3.20.0-win64-x64 -> cmake-3.20.0-windows-x86_64
+  const releases = [
+    {
+      tag_name: 'v3.20.0',
+      assets: [
+        {
+          name: 'cmake-3.20.0-linux-x86_64.tar.gz',
+          browser_download_url:
+            'https://url.test/cmake-3.20.0-linux-x86_64.tar.gz',
+        },
+        {
+          name: 'cmake-3.20.0-windows-x86_64.tar.gz',
+          browser_download_url:
+            'https://url.test/cmake-3.20.0-windows-x86_64.tar.gz',
+        },
+      ],
+    },
+  ];
+
+  beforeEach(() => {
+    nock.disableNetConnect();
+    nock('https://api.github.com')
+      .get('/repos/Kitware/CMake/releases')
+      .reply(200, releases);
+    nock('https://api.github.com')
+      .get('/repos/Kitware/CMake/releases')
+      .query({ page: 2 })
+      .reply(200, []);
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+    nock.enableNetConnect();
+  });
+
+  it('correctly parses the version', async () => {
+    const version_info = await version.getAllVersionInfo();
+    const selected = version.getLatestMatching('3.x', version_info);
+    expect(selected.name).toMatch(/3.20.0/);
+  });
+
+  it('correctly parses the linux archive', async () => {
+    const version_info = await version.getAllVersionInfo();
+    const selected = version.getLatestMatching('3.x', version_info);
+    const assets = selected.assets.filter(
+      (a) => a.platform === 'linux' && a.filetype === 'archive'
+    );
+    expect(assets.length).toBe(1);
+    expect(assets[0]).toEqual({
+      name: 'cmake-3.20.0-linux-x86_64.tar.gz',
+      platform: 'linux',
+      arch: 'x86_64',
+      filetype: 'archive',
+      url: 'https://url.test/cmake-3.20.0-linux-x86_64.tar.gz',
+    });
+  });
+
+  it('correctly parses the windows archive', async () => {
+    const version_info = await version.getAllVersionInfo();
+    const selected = version.getLatestMatching('3.x', version_info);
+    const assets = selected.assets.filter(
+      (a) => a.platform === 'win32' && a.filetype === 'archive'
+    );
+    expect(assets.length).toBe(1);
+    expect(assets[0]).toEqual({
+      name: 'cmake-3.20.0-windows-x86_64.tar.gz',
+      platform: 'win32',
+      arch: 'x86_64',
+      filetype: 'archive',
+      url: 'https://url.test/cmake-3.20.0-windows-x86_64.tar.gz',
+    });
+  });
+});
