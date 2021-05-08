@@ -392,14 +392,12 @@ describe('When using the 3.19 windows release with both 32 and 64 bit archives',
       tag_name: 'v3.19.0',
       assets: [
         {
-          name: 'cmake-3.19.0-win32-x86.tar.gz',
-          browser_download_url:
-            'https://url.test/cmake-3.19.0-win32-x86.tar.gz',
+          name: 'cmake-3.19.0-win32-x86.zip',
+          browser_download_url: 'https://url.test/cmake-3.19.0-win32-x86.zip',
         },
         {
-          name: 'cmake-3.19.0-win64-x64.tar.gz',
-          browser_download_url:
-            'https://url.test/cmake-3.19.0-win64-x64.tar.gz',
+          name: 'cmake-3.19.0-win64-x64.zip',
+          browser_download_url: 'https://url.test/cmake-3.19.0-win64-x64.zip',
         },
       ],
     },
@@ -430,11 +428,11 @@ describe('When using the 3.19 windows release with both 32 and 64 bit archives',
     );
     expect(assets.length).toBe(1);
     expect(assets[0]).toEqual({
-      name: 'cmake-3.19.0-win32-x86.tar.gz',
+      name: 'cmake-3.19.0-win32-x86.zip',
       platform: 'win32',
       arch: 'x86',
       filetype: 'archive',
-      url: 'https://url.test/cmake-3.19.0-win32-x86.tar.gz',
+      url: 'https://url.test/cmake-3.19.0-win32-x86.zip',
     });
   });
 
@@ -449,11 +447,11 @@ describe('When using the 3.19 windows release with both 32 and 64 bit archives',
     );
     expect(assets.length).toBe(1);
     expect(assets[0]).toEqual({
-      name: 'cmake-3.19.0-win64-x64.tar.gz',
+      name: 'cmake-3.19.0-win64-x64.zip',
       platform: 'win32',
       arch: 'x86_64',
       filetype: 'archive',
-      url: 'https://url.test/cmake-3.19.0-win64-x64.tar.gz',
+      url: 'https://url.test/cmake-3.19.0-win64-x64.zip',
     });
   });
 });
