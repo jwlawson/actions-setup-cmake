@@ -44,12 +44,12 @@ There are three options for the action:
    - [GitHub API rate limiting]
    - [GITHUB_TOKEN]
 
-* `use-32bit' forces the use of a 32 bit binary, instead of first looking for a
+* `use-32bit` forces the use of a 32 bit binary, instead of first looking for a
   64 bit binary. Note that more recent releases of cmake only have 32 bit
   packages for windows and not for linux or macos, so this option may cause
   failures in those cases.
 
-  Possible values are 'true' or 'false'. The default is 'false'.
+  Possible values are `true` or `false`. The default is `false`.
 
 ### How it works
 
