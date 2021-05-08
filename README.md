@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup cmake
-      uses: jwlawson/actions-setup-cmake@v1.8
+      uses: jwlawson/actions-setup-cmake@v1.9
       with:
         cmake-version: '3.16.x'
     - name: Use cmake
@@ -25,7 +25,7 @@ jobs:
 
 ### Options
 
-There are two options for the action:
+There are three options for the action:
 
 * `cmake-version` controls the version of CMake that is added to the path. This
   can be a fully specified verison `3.3.0`, partly specified `3.2`, a wildcard
@@ -44,6 +44,12 @@ There are two options for the action:
    - [GitHub API rate limiting]
    - [GITHUB_TOKEN]
 
+* `use-32bit' forces the use of a 32 bit binary, instead of first looking for a
+  64 bit binary. Note that more recent releases of cmake only have 32 bit
+  packages for windows and not for linux or macos, so this option may cause
+  failures in those cases.
+
+  Possible values are 'true' or 'false'. The default is 'false'.
 
 ### How it works
 

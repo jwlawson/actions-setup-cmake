@@ -26,7 +26,11 @@ function extractPlatformFrom(filename: string): string {
     return 'linux';
   } else if (filename.match(/Darwin/) || filename.match(/macos/)) {
     return 'darwin';
-  } else if (filename.match(/win32/) || filename.match(/windows/)) {
+  } else if (
+    filename.match(/win32/) ||
+    filename.match(/windows/) ||
+    filename.match(/win64/)
+  ) {
     return 'win32';
   } else {
     return '';
@@ -54,6 +58,8 @@ function extractFileTypeFrom(filename: string): string {
 
 function extractArchFrom(filename: string): string {
   if (filename.match(/x86_64/)) {
+    return 'x86_64';
+  } else if (filename.match(/x64/)) {
     return 'x86_64';
   } else if (filename.match(/universal/)) {
     return 'x86_64';

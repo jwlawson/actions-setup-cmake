@@ -6,21 +6,29 @@ import * as vi from './version-info';
 
 const PACKAGE_NAME: string = 'cmake';
 
-function getURL(version: vi.VersionInfo): string {
+function getURL(
+  version: vi.VersionInfo,
+  arch_candidates: Array<string>
+): string {
   const assets_for_platform: vi.AssetInfo[] = version.assets
     .filter((a) => a.platform === process.platform && a.filetype === 'archive')
     .sort();
-  let matching_assets = assets_for_platform.filter((a) => a.arch === 'x86_64');
-  if (matching_assets.length == 0) {
-    // Fall back to looking for x86 packages if there are no x86_64 ones.
-    matching_assets = assets_for_platform.filter((a) => a.arch === 'x86');
-
-    if (matching_assets.length == 0) {
-      // If there are no x86_64 or x86 packages then give up.
-      throw new Error(
-        `Could not find ${process.platform} asset for cmake version ${version.name}`
-      );
+  // The arch_candidates provides an ordered set of architectures to try, and
+  // the first matching asset is used. This will typically be 'x86_64' first,
+  // with 'x86' checked if nothing was found.
+  let matching_assets = undefined;
+  for (let arch of arch_candidates) {
+    const arch_assets = assets_for_platform.filter((a) => a.arch === arch);
+    if (arch_assets.length != 0) {
+      matching_assets = arch_assets;
+      break;
     }
+  }
+  if (matching_assets == undefined) {
+    // If there are no x86_64 or x86 packages then give up.
+    throw new Error(
+      `Could not find ${process.platform} asset for cmake version ${version.name}`
+    );
   }
   if (matching_assets.length > 1) {
     core.warning(`Found ${matching_assets.length} matching packages.`);
@@ -57,9 +65,10 @@ async function getArchive(url: string): Promise<string> {
 }
 
 export async function addCMakeToToolCache(
-  version: vi.VersionInfo
+  version: vi.VersionInfo,
+  arch_candidates: Array<string>
 ): Promise<string> {
-  const extracted_archive = await getArchive(getURL(version));
+  const extracted_archive = await getArchive(getURL(version, arch_candidates));
   return await tc.cacheDir(extracted_archive, PACKAGE_NAME, version.name);
 }
 
@@ -83,10 +92,13 @@ async function getBinDirectoryFrom(tool_path: string): Promise<string> {
   }
 }
 
-export async function addCMakeToPath(version: vi.VersionInfo): Promise<void> {
+export async function addCMakeToPath(
+  version: vi.VersionInfo,
+  arch_candidates: Array<string>
+): Promise<void> {
   let tool_path: string = tc.find(PACKAGE_NAME, version.name);
   if (!tool_path) {
-    tool_path = await addCMakeToToolCache(version);
+    tool_path = await addCMakeToToolCache(version, arch_candidates);
   }
   await core.addPath(await getBinDirectoryFrom(tool_path));
 }

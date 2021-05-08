@@ -7,6 +7,9 @@ inputs:
   github-api-token:
     description: 'GitHub token to use when retrieving version info'
     default: '${{ github.token }}'
+  use-32bit:
+    description: 'Force using 32 bit version of cmake, instead of looking for 64 bit version'
+    default: 'false'
 runs:
   using: 'node12'
   main: 'dist/index.js'

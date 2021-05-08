@@ -383,3 +383,75 @@ describe('When using the 3.20 release', () => {
     });
   });
 });
+
+describe('When using the 3.19 windows release with both 32 and 64 bit archives', () => {
+  // The windows releases before 3.20 had different platform naming for 32 and 64 bit archives
+  // cmake-3.19.8-win32-x86.zip and cmake-3.19.8-win64-x64.zip
+  const releases = [
+    {
+      tag_name: 'v3.19.0',
+      assets: [
+        {
+          name: 'cmake-3.19.0-win32-x86.zip',
+          browser_download_url: 'https://url.test/cmake-3.19.0-win32-x86.zip',
+        },
+        {
+          name: 'cmake-3.19.0-win64-x64.zip',
+          browser_download_url: 'https://url.test/cmake-3.19.0-win64-x64.zip',
+        },
+      ],
+    },
+  ];
+
+  beforeEach(() => {
+    nock.disableNetConnect();
+    nock('https://api.github.com')
+      .get('/repos/Kitware/CMake/releases')
+      .reply(200, releases);
+    nock('https://api.github.com')
+      .get('/repos/Kitware/CMake/releases')
+      .query({ page: 2 })
+      .reply(200, []);
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+    nock.enableNetConnect();
+  });
+
+  it('correctly parses the 32 bit archive', async () => {
+    const version_info = await version.getAllVersionInfo();
+    const selected = version.getLatestMatching('3.x', version_info);
+    const assets = selected.assets.filter(
+      (a) =>
+        a.platform === 'win32' && a.filetype === 'archive' && a.arch === 'x86'
+    );
+    expect(assets.length).toBe(1);
+    expect(assets[0]).toEqual({
+      name: 'cmake-3.19.0-win32-x86.zip',
+      platform: 'win32',
+      arch: 'x86',
+      filetype: 'archive',
+      url: 'https://url.test/cmake-3.19.0-win32-x86.zip',
+    });
+  });
+
+  it('correctly parses the 64 bit archive', async () => {
+    const version_info = await version.getAllVersionInfo();
+    const selected = version.getLatestMatching('3.x', version_info);
+    const assets = selected.assets.filter(
+      (a) =>
+        a.platform === 'win32' &&
+        a.filetype === 'archive' &&
+        a.arch === 'x86_64'
+    );
+    expect(assets.length).toBe(1);
+    expect(assets[0]).toEqual({
+      name: 'cmake-3.19.0-win64-x64.zip',
+      platform: 'win32',
+      arch: 'x86_64',
+      filetype: 'archive',
+      url: 'https://url.test/cmake-3.19.0-win64-x64.zip',
+    });
+  });
+});

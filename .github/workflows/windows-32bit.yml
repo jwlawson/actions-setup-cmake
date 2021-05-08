@@ -1,0 +1,34 @@
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+
+jobs:
+  check-win32:
+    runs-on: ${{ matrix.os }}
+    name: Check action on 32bit windows
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest]
+        cmake_ver: ['', '3.19.3', '3.15.1', '2.8']
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup cmake
+      uses: ./
+      id: setup
+      with:
+        cmake-version: ${{ matrix.cmake_ver }}
+        use-32bit: 'true'
+
+    - name: Run cmake --version
+      shell: bash
+      run: |
+        VERSION=`cmake --version`
+        echo $VERSION
+        [[ "$VERSION" =~ "${{ matrix.cmake_ver }}" ]]
