@@ -17,7 +17,7 @@ async function run() {
 
     await setup.addCMakeToPath(chosen_version_info, arch_candidates);
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed((error as Error).message);
   }
 }
 run();
