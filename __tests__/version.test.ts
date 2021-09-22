@@ -16,8 +16,7 @@ describe('Pulling from multipage results with Link header', () => {
       .get('/repos/Kitware/CMake/releases')
       .replyWithFile(200, path.join(dataPath, 'releases.json'), {
         'Content-Type': 'application/json',
-        Link:
-          '<https://api.github.com/repos/Kitware/CMake/releases?page=2>; rel="next", <https://api.github.com/repos/Kitware/CMake/releases?page=2>; rel="last"',
+        Link: '<https://api.github.com/repos/Kitware/CMake/releases?page=2>; rel="next", <https://api.github.com/repos/Kitware/CMake/releases?page=2>; rel="last"',
       });
     // Releases file 2 contains version info for:
     // 2.4.8, 2.6.4, 2.8.10.2, 2.8.12.2
@@ -28,8 +27,7 @@ describe('Pulling from multipage results with Link header', () => {
       .query({ page: 2 })
       .replyWithFile(200, path.join(dataPath, 'releases2.json'), {
         'Content-Type': 'application/json',
-        Link:
-          '<https://api.github.com/repos/Kitware/CMake/releases?page=1>; rel="first", <https://api.github.com/repos/Kitware/CMake/releases?page=1>; rel="prev"',
+        Link: '<https://api.github.com/repos/Kitware/CMake/releases?page=1>; rel="first", <https://api.github.com/repos/Kitware/CMake/releases?page=1>; rel="prev"',
       });
   });
   afterEach(() => {
