@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup cmake
-      uses: jwlawson/actions-setup-cmake@v1.9
+      uses: jwlawson/actions-setup-cmake@v1.10
       with:
         cmake-version: '3.16.x'
     - name: Use cmake
@@ -31,6 +31,9 @@ There are three options for the action:
   can be a fully specified verison `3.3.0`, partly specified `3.2`, a wildcard
   version `3.2.x`. By default it is empty which will give the latest CMake
   version available on GitHub.
+
+  The version can also be specified to be `latest` which is equivalent to
+  leaving it blank and will give the latest version.
 
   The [version tests] show some expected values for given versions.
 
