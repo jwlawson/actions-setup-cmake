@@ -32,6 +32,9 @@ There are three options for the action:
   version `3.2.x`. By default it is empty which will give the latest CMake
   version available on GitHub.
 
+  The version can also be specified to be `latest` which is equivalent to
+  leaving it blank and will give the latest version.
+
   The [version tests] show some expected values for given versions.
 
 * `github-api-token` is optional, but is used to authenticate with GitHub's
