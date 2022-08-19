@@ -1,6 +1,6 @@
 {
   "name": "actions-setup-cmake",
-  "version": "1.12.0",
+  "version": "1.12.1",
   "description": "GitHub action to setup cmake",
   "main": "dist/index.js",
   "repository": {
@@ -21,7 +21,7 @@
   "author": "John Lawson",
   "license": "BSD-3-Clause-Clear",
   "dependencies": {
-    "@actions/core": "^1.5.0",
+    "@actions/core": "^1.9.1",
     "@actions/tool-cache": "^1.7.1",
     "semver": "^7.3.5",
     "typed-rest-client": "^1.8.4"
