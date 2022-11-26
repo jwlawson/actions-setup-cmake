@@ -193,9 +193,11 @@ export function getLatestMatching(
   version: string,
   version_list: vi.VersionInfo[]
 ): vi.VersionInfo {
+  core.debug(`Searching for ${version} in ${JSON.stringify(version_list)}`)
   let matching_versions = version_list
     .filter((v) => !v.draft && !v.prerelease)
     .filter((v) => semver.satisfies(v.name, version));
+  core.debug(`Found ${JSON.stringify(matching_versions)}`)
   if (matching_versions.length == 0) {
     throw new Error('Unable to find version matching ' + version);
   }
