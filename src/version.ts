@@ -189,15 +189,19 @@ function getLatest(version_list: vi.VersionInfo[]): vi.VersionInfo {
   return sorted_versions[0];
 }
 
+function getVersionListString(version_list: vi.VersionInfo[]): String {
+	return JSON.stringify(version_list.map((v) => v.name));
+}
+
 export function getLatestMatching(
   version: string,
   version_list: vi.VersionInfo[]
 ): vi.VersionInfo {
-  core.debug(`Searching for ${version} in ${JSON.stringify(version_list)}`);
+  core.debug(`Searching for ${version} in ${getVersionListString(version_list)}`);
   let matching_versions = version_list
     .filter((v) => !v.draft && !v.prerelease)
     .filter((v) => semver.satisfies(v.name, version));
-  core.debug(`Found ${JSON.stringify(matching_versions)}`);
+  core.debug(`Found ${getVersionListString(matching_versions)}`);
   if (matching_versions.length == 0) {
     throw new Error('Unable to find version matching ' + version);
   }

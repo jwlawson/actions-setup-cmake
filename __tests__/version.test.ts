@@ -81,6 +81,16 @@ describe('Pulling from multipage results with Link header', () => {
     const selected = version.getLatestMatching('2.8.10', version_info);
     expect(selected.name).toMatch(/2.8.10/);
   });
+  it('selects the correct version for 2.8.12.2', async () => {
+    const version_info = await version.getAllVersionInfo();
+    const selected = version.getLatestMatching('2.8.12.2', version_info);
+    expect(selected.name).toMatch(/2.8.12.2/);
+  });
+  it('selects the correct version for 2.8.12', async () => {
+    const version_info = await version.getAllVersionInfo();
+    const selected = version.getLatestMatching('2.8.12', version_info);
+    expect(selected.name).toMatch(/2.8.12/);
+  });
 });
 
 describe('Pulling from multipage results without Link header', () => {
