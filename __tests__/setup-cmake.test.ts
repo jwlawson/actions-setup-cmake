@@ -268,7 +268,7 @@ describe('Using version 3.19.3', () => {
       },
       {
         name: 'cmake-3.19.3-macos10.10-universal.tar.gz',
-        platform: 'darwin',
+        platform: 'darwin10.10',
         arch: 'x86_64',
         filetype: 'archive',
         url: 'https://fakeaddress.com/cmake-3.19.3-macos-universal.tar.gz',
