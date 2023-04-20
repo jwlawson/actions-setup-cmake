@@ -31,7 +31,11 @@ function getURL(
     );
   }
   if (matching_assets.length > 1) {
-    core.warning(`Found ${matching_assets.length} matching packages.`);
+    core.warning(
+      `Found ${matching_assets.length} matching packages: ${matching_assets.map(
+        (a) => a.name
+      )}`
+    );
     // If there are multiple assets it is likely to be because there are MacOS
     // builds for PPC, x86 and x86_64. Universal packages prevent parsing the
     // architecture completely, so we need to match against the full url to
