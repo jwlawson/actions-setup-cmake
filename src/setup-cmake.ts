@@ -30,18 +30,37 @@ function getURL(
       `Could not find ${process.platform} asset for cmake version ${version.name}`
     );
   }
+  core.debug(
+    `Assets matching platform and arch: ${matching_assets.map((a) => a.name)}`
+  );
   if (matching_assets.length > 1) {
-    core.warning(`Found ${matching_assets.length} matching packages.`);
     // If there are multiple assets it is likely to be because there are MacOS
     // builds for PPC, x86 and x86_64. Universal packages prevent parsing the
-    // architecture completely, so we need to match against the full url to
+    // architecture completely, so we need to match against the full name to
     // differentiate between e.g. cmake-2.8.10.2-Darwin-universal.tar.gz and
     // cmake-2.8.10.2-Darwin64-universal.tar.gz.
     // Check to see if this narrows down the options or just removes all options.
     // Prefer to use all previous matches when none of them include '64'.
-    const possible_assets = matching_assets.filter((a) => a.url.match('64'));
+    //
+    // CMake 3.19 and above provide two Mac packages:
+    // * cmake-3.19.4-macos-universal.dmg
+    // * cmake-3.19.4-macos10.10-universal.dmg
+    // The 10.10 package uses OSX deployment target 10.10, while the standard
+    // package uses 10.13. As the oldest (and now deprecated) github runner is
+    // on 10.15 we can safely choose to use the standard package.
+    // https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners
+    const possible_assets = matching_assets.filter(
+      (a) => a.url.match('64') || a.name.match(/macos-universal/)
+    );
     if (possible_assets.length > 0) {
       matching_assets = possible_assets;
+    }
+    if (matching_assets.length > 1) {
+      core.warning(
+        `Found ${
+          matching_assets.length
+        } matching packages: ${matching_assets.map((a) => a.name)}`
+      );
     }
   }
   const asset_url: string = matching_assets[0].url;
