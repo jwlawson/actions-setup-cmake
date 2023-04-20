@@ -24,6 +24,15 @@ interface GitHubVersion {
 function extractPlatformFrom(filename: string): string {
   if (filename.match(/Linux/) || filename.match(/linux/)) {
     return 'linux';
+  } else if (filename.match(/macos10.10/)) {
+    // CMake 3.19 and above provide two Mac packages:
+    // * cmake-3.19.4-macos-universal.dmg
+    // * cmake-3.19.4-macos10.10-universal.dmg
+    // The 10.10 package uses OSX deployment target 10.10, while the standard
+    // package uses 10.13. As the oldest (and now deprecated) github runner is
+    // on 10.15 we can safely choose to use the standard package.
+    // https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners
+    return 'darwin10.10';
   } else if (filename.match(/Darwin/) || filename.match(/macos/)) {
     return 'darwin';
   } else if (
