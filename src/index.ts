@@ -13,6 +13,7 @@ async function run() {
       required_version,
       all_version_info
     );
+    core.info(`Using version {chosen_version_info.name} of cmake`);
 
     const use_32bits = core.getInput('use-32bit').toLowerCase() === 'true';
     const arch_candidates = use_32bits ? ['x86'] : ['x86_64', 'x86'];
