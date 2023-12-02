@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup cmake
-      uses: jwlawson/actions-setup-cmake@v1.13
+      uses: jwlawson/actions-setup-cmake@v1.14
       with:
         cmake-version: '3.16.x'
     - name: Use cmake
@@ -66,5 +66,3 @@ executables are provided on the path for subsequent workflow steps.
 [version tests]: ./__tests__/version.test.ts
 [GitHub API rate limiting]: https://developer.github.com/v3/#rate-limiting
 [GITHUB_TOKEN]: https://help.github.com/en/actions/automating-your-workflow-with-github-actions/authenticating-with-the-github_token#about-the-github_token-secret
-
-
