@@ -1,6 +1,6 @@
 {
   "name": "actions-setup-cmake",
-  "version": "1.14.2",
+  "version": "2.0.0",
   "description": "GitHub action to setup cmake",
   "main": "dist/index.js",
   "repository": {
