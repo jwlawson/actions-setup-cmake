@@ -1,6 +1,6 @@
 {
   "name": "actions-setup-cmake",
-  "version": "1.14.2",
+  "version": "2.0.0",
   "description": "GitHub action to setup cmake",
   "main": "dist/index.js",
   "repository": {
@@ -30,8 +30,9 @@
     "@actions/github": "^5.0.0",
     "@actions/io": "^1.1.0",
     "@types/jest": "^27.0.02",
+    "@types/node": "^20.11.13",
     "@types/semver": "^7.3.5",
-    "@vercel/ncc": "^0.31.1",
+    "@vercel/ncc": "^0.38.1",
     "husky": "^3.1.0",
     "jest": "^27.2.1",
     "nock": "^13.0.11",

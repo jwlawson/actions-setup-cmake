@@ -11,5 +11,5 @@ inputs:
     description: 'Force using 32 bit version of cmake, instead of looking for 64 bit version'
     default: 'false'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
