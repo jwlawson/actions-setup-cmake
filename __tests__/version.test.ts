@@ -288,7 +288,7 @@ describe('When providing multiple different archs', () => {
     });
   });
 
-  it('correctly parses the aarch86 archive', async () => {
+  it('correctly parses the aarch64 archive', async () => {
     const version_info = await version.getAllVersionInfo();
     const selected = version.getLatestMatching('3.x', version_info);
     const assets = selected.assets;
@@ -298,7 +298,7 @@ describe('When providing multiple different archs', () => {
     expect(macosAsset).toEqual({
       name: 'cmake-3.19.3-Linux-aarch64.tar.gz',
       platform: 'linux',
-      arch: '',
+      arch: 'arm64',
       filetype: 'archive',
       url: 'https://fakeaddress.com/cmake-3.19.3-Linux-aarch64.tar.gz',
     });

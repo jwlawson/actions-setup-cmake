@@ -10,6 +10,9 @@ inputs:
   use-32bit:
     description: 'Force using 32 bit version of cmake, instead of looking for 64 bit version'
     default: 'false'
+  arch-series:
+    description: 'Architecture series - could be x86, x86_64, arm, arm64 - defaults to arch of runner'
+    default: '${{ runner.arch }}'
 runs:
   using: 'node20'
   main: 'dist/index.js'

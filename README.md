@@ -54,6 +54,12 @@ There are three options for the action:
 
   Possible values are `true` or `false`. The default is `false`.
 
+* `arch-series` forces a particular architecture series - eg arm or x86.  This
+  changes the interpretation of use-32bit.
+
+  Possible values are 'x86' (or 'x86_64') and 'arm' (or 'arm64').  Default is
+  based on the architecture from the runner.
+
 ### How it works
 
 The action will download the list of releases of CMake available on GitHub and
