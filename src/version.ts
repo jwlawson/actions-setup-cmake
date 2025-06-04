@@ -67,6 +67,10 @@ function extractArchFrom(filename: string): string {
     return 'x86';
   } else if (filename.match(/i386/)) {
     return 'x86';
+  } else if (filename.match(/arm64/)) {
+    return 'arm64';
+  } else if (filename.match(/aarch64/)) {
+    return 'arm64';
   } else {
     return '';
   }

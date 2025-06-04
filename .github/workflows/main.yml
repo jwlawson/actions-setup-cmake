@@ -12,8 +12,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        cmake_ver: ['', '3.19.3', '3.15.1', '2.8']
+        os: [ubuntu-latest, ubuntu-24.04-arm, windows-latest, macos-latest]
+        cmake_ver: ['', '3.28.6', '3.19.3', '3.15.1', '2.8']
+        exclude: # Some of these versions are missing
+          - os: ubuntu-24.04-arm
+            cmake_ver: '3.15.1'
+          - os: ubuntu-24.04-arm
+            cmake_ver: '2.8'
 
     steps:
     - name: Checkout
@@ -47,7 +52,7 @@ jobs:
     name: Unit Test
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, ubuntu-24.04-arm, windows-latest, macos-latest]
 
     steps:
     - name: Setup node

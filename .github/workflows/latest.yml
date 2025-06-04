@@ -8,7 +8,7 @@ jobs:
     name: Test latest version
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, ubuntu-24.04-arm, windows-latest, macos-latest]
 
     steps:
     - name: Checkout
