@@ -61,12 +61,16 @@ function extractArchFrom(filename: string): string {
     return 'x86_64';
   } else if (filename.match(/x64/)) {
     return 'x86_64';
-  } else if (filename.match(/universal/)) {
-    return 'x86_64';
   } else if (filename.match(/x86/)) {
     return 'x86';
   } else if (filename.match(/i386/)) {
     return 'x86';
+  } else if (filename.match(/arm64/)) {
+    return 'aarch64';
+  } else if (filename.match(/aarch64/)) {
+    return 'aarch64';
+  } else if (filename.match(/universal/)) {
+    return 'universal';
   } else {
     return '';
   }
@@ -200,4 +204,21 @@ export function getLatestMatching(
     throw new Error('Unable to find version matching ' + version);
   }
   return getLatest(matching_versions);
+}
+
+export function getArchCandidates(
+  platform: string,
+  arch: string,
+  use_32bits: boolean
+): string[] {
+  if (platform === 'darwin') {
+    return ['universal', 'x86_64'];
+  }
+  if (arch === 'x64') {
+    return use_32bits ? ['x86'] : ['x86_64', 'x86'];
+  } else if (arch === 'arm64') {
+    return use_32bits ? ['arm'] : ['aarch64', 'arm'];
+  } else {
+    throw new Error(`Unsupported platform-architecture: ${platform}-${arch}`);
+  }
 }

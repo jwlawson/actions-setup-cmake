@@ -224,7 +224,7 @@ describe('When using macos 3.19.2 release', () => {
     expect(macosAsset).toEqual({
       name: 'cmake-3.19.2-macos-universal.tar.gz',
       platform: 'darwin',
-      arch: 'x86_64',
+      arch: 'universal',
       filetype: 'archive',
       url: 'https://fakeaddress.com/cmake-3.19.2-macos-universal.tar.gz',
     });
@@ -288,7 +288,7 @@ describe('When providing multiple different archs', () => {
     });
   });
 
-  it('correctly parses the aarch86 archive', async () => {
+  it('correctly parses the aarch64 archive', async () => {
     const version_info = await version.getAllVersionInfo();
     const selected = version.getLatestMatching('3.x', version_info);
     const assets = selected.assets;
@@ -298,7 +298,7 @@ describe('When providing multiple different archs', () => {
     expect(macosAsset).toEqual({
       name: 'cmake-3.19.3-Linux-aarch64.tar.gz',
       platform: 'linux',
-      arch: '',
+      arch: 'aarch64',
       filetype: 'archive',
       url: 'https://fakeaddress.com/cmake-3.19.3-Linux-aarch64.tar.gz',
     });
@@ -451,5 +451,48 @@ describe('When using the 3.19 windows release with both 32 and 64 bit archives',
       filetype: 'archive',
       url: 'https://url.test/cmake-3.19.0-win64-x64.zip',
     });
+  });
+});
+
+describe('getArchCandidates() unit tests', () => {
+  it('supports darwin platform', () => {
+    // On Darwin, accept packages tagged either universal or x86_64 (in that
+    // order of preference), regardless of platform: arm64 and x86_64 runners
+    // can use either. Also ignore the 32-bit flag.
+    expect(version.getArchCandidates('darwin', 'x86_64', true)).toStrictEqual([
+      'universal',
+      'x86_64',
+    ]);
+    expect(version.getArchCandidates('darwin', 'x86_64', false)).toStrictEqual([
+      'universal',
+      'x86_64',
+    ]);
+  });
+
+  it('supports linux and win32 x64 runners', () => {
+    for (const platform of ['linux', 'win32']) {
+      expect(version.getArchCandidates(platform, 'x64', true)).toStrictEqual([
+        'x86',
+      ]);
+      expect(version.getArchCandidates(platform, 'x64', false)).toStrictEqual([
+        'x86_64',
+        'x86',
+      ]);
+    }
+  });
+  it('supports linux and win32 arm64 runners', () => {
+    for (const platform of ['linux', 'win32']) {
+      expect(version.getArchCandidates(platform, 'arm64', true)).toStrictEqual([
+        'arm',
+      ]);
+      expect(version.getArchCandidates(platform, 'arm64', false)).toStrictEqual(
+        ['aarch64', 'arm']
+      );
+    }
+  });
+  it('throws on unsupported architectures', () => {
+    expect(() => version.getArchCandidates('linux', 'mmix', true)).toThrowError(
+      'Unsupported platform-architecture'
+    );
   });
 });
