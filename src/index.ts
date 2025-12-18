@@ -25,7 +25,11 @@ async function run() {
     );
     core.debug(`arch candidates: ${arch_candidates}`);
 
-    await setup.addCMakeToPath(chosen_version_info, arch_candidates);
+    await setup.addCMakeToPath(
+      chosen_version_info,
+      process.platform,
+      arch_candidates
+    );
   } catch (error) {
     core.setFailed((error as Error).message);
   }
