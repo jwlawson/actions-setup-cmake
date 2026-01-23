@@ -2,6 +2,7 @@ import * as rest from 'typed-rest-client/RestClient';
 import * as core from '@actions/core';
 import * as semver from 'semver';
 import * as vi from './version-info';
+import { type InternalArch } from './version-info';
 
 const VERSION_URL: string =
   'https://api.github.com/repos/Kitware/CMake/releases';
@@ -56,19 +57,23 @@ function extractFileTypeFrom(filename: string): string {
   }
 }
 
-function extractArchFrom(filename: string): string {
+function extractArchFrom(filename: string): InternalArch {
   if (filename.match(/x86_64/)) {
     return 'x86_64';
   } else if (filename.match(/x64/)) {
-    return 'x86_64';
-  } else if (filename.match(/universal/)) {
     return 'x86_64';
   } else if (filename.match(/x86/)) {
     return 'x86';
   } else if (filename.match(/i386/)) {
     return 'x86';
+  } else if (filename.match(/arm64/)) {
+    return 'aarch64';
+  } else if (filename.match(/aarch64/)) {
+    return 'aarch64';
+  } else if (filename.match(/universal/)) {
+    return 'universal';
   } else {
-    return '';
+    return 'unknown';
   }
 }
 
@@ -200,4 +205,21 @@ export function getLatestMatching(
     throw new Error('Unable to find version matching ' + version);
   }
   return getLatest(matching_versions);
+}
+
+export function getArchCandidates(
+  platform: NodeJS.Platform,
+  arch: NodeJS.Architecture,
+  use_32bits: boolean
+): InternalArch[] {
+  if (platform === 'darwin') {
+    return ['universal', 'x86_64'];
+  }
+  if (arch === 'x64') {
+    return use_32bits ? ['x86'] : ['x86_64', 'x86'];
+  } else if (arch === 'arm64') {
+    return ['aarch64'];
+  } else {
+    throw new Error(`Unsupported platform-architecture: ${platform}-${arch}`);
+  }
 }

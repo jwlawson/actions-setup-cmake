@@ -8,10 +8,11 @@ const PACKAGE_NAME: string = 'cmake';
 
 function getURL(
   version: vi.VersionInfo,
+  platform: NodeJS.Platform,
   arch_candidates: Array<string>
 ): string {
   const assets_for_platform: vi.AssetInfo[] = version.assets
-    .filter((a) => a.platform === process.platform && a.filetype === 'archive')
+    .filter((a) => a.platform === platform && a.filetype === 'archive')
     .sort();
   // The arch_candidates provides an ordered set of architectures to try, and
   // the first matching asset is used. This will typically be 'x86_64' first,
@@ -25,9 +26,11 @@ function getURL(
     }
   }
   if (matching_assets == undefined) {
-    // If there are no x86_64 or x86 packages then give up.
+    // If there are no packages of the right platform + arch then give up.
     throw new Error(
-      `Could not find ${process.platform} asset for cmake version ${version.name}`
+      `Could not find ${platform} asset for cmake version ${
+        version.name
+      } for candidate architectures: ${arch_candidates.join(',')}`
     );
   }
   core.debug(
@@ -66,7 +69,7 @@ function getURL(
   const asset_url: string = matching_assets[0].url;
   const num_found: number = matching_assets.length;
   core.debug(
-    `Found ${num_found} assets for ${process.platform} with version ${version.name}`
+    `Found ${num_found} assets for ${platform} with version ${version.name}`
   );
   core.debug(`Using asset url ${asset_url}`);
   return asset_url;
@@ -85,13 +88,19 @@ async function getArchive(url: string): Promise<string> {
 
 export async function addCMakeToToolCache(
   version: vi.VersionInfo,
+  platform: NodeJS.Platform,
   arch_candidates: Array<string>
 ): Promise<string> {
-  const extracted_archive = await getArchive(getURL(version, arch_candidates));
+  const extracted_archive = await getArchive(
+    getURL(version, platform, arch_candidates)
+  );
   return await tc.cacheDir(extracted_archive, PACKAGE_NAME, version.name);
 }
 
-async function getBinDirectoryFrom(tool_path: string): Promise<string> {
+async function getBinDirectoryFrom(
+  tool_path: string,
+  platform: NodeJS.Platform
+): Promise<string> {
   // The cmake archive should have a single top level directory with a name
   // similar to 'cmake-3.16.2-win64-x64'. This then has subdirectories 'bin',
   // 'doc', 'share'.
@@ -99,7 +108,7 @@ async function getBinDirectoryFrom(tool_path: string): Promise<string> {
   if (root_dir_path.length != 1) {
     throw new Error('Archive does not have expected layout.');
   }
-  if (process.platform === 'darwin') {
+  if (platform === 'darwin') {
     // On MacOS the bin directory is hidden behind a few more folders
     // e.g. <tool_path>/cmake-3.16.2-Darwin-x86_64/CMake.app/Contents/bin/
     //   or <tool_path>/cmake-2.8.10-Darwin-x86_64/CMake 2.8-10.app/Contents/bin/
@@ -113,11 +122,12 @@ async function getBinDirectoryFrom(tool_path: string): Promise<string> {
 
 export async function addCMakeToPath(
   version: vi.VersionInfo,
+  platform: NodeJS.Platform,
   arch_candidates: Array<string>
 ): Promise<void> {
   let tool_path: string = tc.find(PACKAGE_NAME, version.name);
   if (!tool_path) {
-    tool_path = await addCMakeToToolCache(version, arch_candidates);
+    tool_path = await addCMakeToToolCache(version, platform, arch_candidates);
   }
-  await core.addPath(await getBinDirectoryFrom(tool_path));
+  core.addPath(await getBinDirectoryFrom(tool_path, platform));
 }
