@@ -10,6 +10,7 @@ process.env['RUNNER_TOOL_CACHE'] = cachePath;
 
 import * as setup from '../src/setup-cmake';
 import * as vi from '../src/version-info';
+import * as v from '../src/version';
 import * as fs from 'fs';
 
 afterEach(() => {
@@ -58,17 +59,11 @@ describe('When adding tool to cache', () => {
   });
 
   async function checkDownloads(
-    platform: string,
+    platform: NodeJS.Platform,
     darwin: boolean,
     linux: boolean,
     windows: boolean
   ) {
-    const orig_platform: string = process.platform;
-    Object.defineProperty(process, 'platform', {
-      value: platform,
-    });
-    expect(process.platform).toBe(platform);
-
     const darwin_nock = nock('https://fakeaddress.com')
       .get('/cmake-Darwin-x86_64.tar.gz')
       .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
@@ -79,14 +74,10 @@ describe('When adding tool to cache', () => {
       .get('/cmake-win32-x86_64.zip')
       .replyWithFile(200, path.join(dataPath, 'empty.zip'));
 
-    await setup.addCMakeToToolCache(required_version, ['x86_64']);
+    await setup.addCMakeToToolCache(required_version, platform, ['x86_64']);
     expect(darwin_nock.isDone()).toBe(darwin);
     expect(linux_nock.isDone()).toBe(linux);
     expect(windows_nock.isDone()).toBe(windows);
-
-    Object.defineProperty(process, 'platform', {
-      value: orig_platform,
-    });
   }
 
   it('downloads right archive on windows', async () => {
@@ -135,25 +126,21 @@ describe('When using version 3.19.2 on macos', () => {
     nock.enableNetConnect();
   });
 
-  it('downloads the macos archive', async () => {
-    const orig_platform: string = process.platform;
-    Object.defineProperty(process, 'platform', {
-      value: 'darwin',
-    });
-    expect(process.platform).toBe('darwin');
-    const package_nock = nock('https://fakeaddress.com')
-      .get('/cmake-3.19.2-macos-universal.dmg')
-      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
-    const archive_nock = nock('https://fakeaddress.com')
-      .get('/cmake-3.19.2-macos-universal.tar.gz')
-      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
-    await setup.addCMakeToToolCache(macos_version, ['x86_64']);
-    expect(package_nock.isDone()).toBe(false);
-    expect(archive_nock.isDone()).toBe(true);
-    Object.defineProperty(process, 'platform', {
-      value: orig_platform,
-    });
-  });
+  it.each(['arm64', 'x64'] as NodeJS.Architecture[])(
+    'downloads the universal macos archive (%s)',
+    async (arch) => {
+      const package_nock = nock('https://fakeaddress.com')
+        .get('/cmake-3.19.2-macos-universal.dmg')
+        .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+      const archive_nock = nock('https://fakeaddress.com')
+        .get('/cmake-3.19.2-macos-universal.tar.gz')
+        .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+      const candidates = v.getArchCandidates('darwin', arch, false);
+      await setup.addCMakeToToolCache(macos_version, 'darwin', candidates);
+      expect(package_nock.isDone()).toBe(false);
+      expect(archive_nock.isDone()).toBe(true);
+    }
+  );
 });
 
 describe('When using version 2.8', () => {
@@ -201,41 +188,33 @@ describe('When using version 2.8', () => {
     nock.enableNetConnect();
   });
 
-  it('downloads the 64 bit archive on macos', async () => {
-    const orig_platform: string = process.platform;
-    Object.defineProperty(process, 'platform', {
-      value: 'darwin',
-    });
-    expect(process.platform).toBe('darwin');
-    const darwin_nock = nock('https://fakeaddress.com')
-      .get('/cmake-2.8.12.2-Darwin-universal.tar.gz')
-      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
-    const darwin64_nock = nock('https://fakeaddress.com')
-      .get('/cmake-2.8.12.2-Darwin64-universal.tar.gz')
-      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
-    await setup.addCMakeToToolCache(version, ['x86_64', 'x86']);
-    expect(darwin_nock.isDone()).toBe(false);
-    expect(darwin64_nock.isDone()).toBe(true);
-    Object.defineProperty(process, 'platform', {
-      value: orig_platform,
-    });
-  });
+  it.each(['arm64', 'x64'] as NodeJS.Architecture[])(
+    'downloads the 64 bit archive on macos (%s)',
+    async (arch) => {
+      const darwin_nock = nock('https://fakeaddress.com')
+        .get('/cmake-2.8.12.2-Darwin-universal.tar.gz')
+        .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+      const darwin64_nock = nock('https://fakeaddress.com')
+        .get('/cmake-2.8.12.2-Darwin64-universal.tar.gz')
+        .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+      const candidates = v.getArchCandidates('darwin', arch, false);
+      expect(candidates).toEqual(['universal', 'x86_64']);
+      await setup.addCMakeToToolCache(version, 'darwin', candidates);
+      expect(darwin_nock.isDone()).toBe(false);
+      expect(darwin64_nock.isDone()).toBe(true);
+    }
+  );
 
-  it('downloads the 32 bit archive on linux', async () => {
-    const orig_platform: string = process.platform;
-    Object.defineProperty(process, 'platform', {
-      value: 'linux',
-    });
-    expect(process.platform).toBe('linux');
+  // There is no Linux x86_64 version of cmake 2.8.12 (!!)
+  it('downloads the 32 bit archive on x64 linux when that is all that is available', async () => {
     const linux_nock = nock('https://fakeaddress.com')
       .get('/cmake-2.8.12.2-Linux-i386.tar.gz')
       .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
 
-    await setup.addCMakeToToolCache(version, ['x86_64', 'x86']);
+    const candidates = v.getArchCandidates('linux', 'x64', false);
+    expect(candidates).toEqual(['x86_64', 'x86']);
+    await setup.addCMakeToToolCache(version, 'linux', candidates);
     expect(linux_nock.isDone()).toBe(true);
-    Object.defineProperty(process, 'platform', {
-      value: orig_platform,
-    });
   });
 });
 
@@ -248,7 +227,7 @@ describe('Using version 3.19.3', () => {
       {
         name: 'cmake-3.19.3-Linux-aarch64.tar.gz',
         platform: 'linux',
-        arch: '',
+        arch: 'aarch64',
         filetype: 'archive',
         url: 'https://fakeaddress.com/cmake-3.19.3-Linux-aarch64.tar.gz',
       },
@@ -288,45 +267,52 @@ describe('Using version 3.19.3', () => {
     nock.enableNetConnect();
   });
 
-  it('downloads the x86_64 archive on linux', async () => {
-    const orig_platform: string = process.platform;
-    Object.defineProperty(process, 'platform', {
-      value: 'linux',
-    });
-    expect(process.platform).toBe('linux');
-    const x86_nock = nock('https://fakeaddress.com')
-      .get('/cmake-3.19.3-Linux-x86_64.tar.gz')
-      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
-    const aarch64_nock = nock('https://fakeaddress.com')
-      .get('/cmake-3.19.3-Linux-aarch64.tar.gz')
-      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
-    await setup.addCMakeToToolCache(version, ['x86_64']);
-    expect(x86_nock.isDone()).toBe(true);
-    expect(aarch64_nock.isDone()).toBe(false);
-    Object.defineProperty(process, 'platform', {
-      value: orig_platform,
-    });
-  });
+  it.each([
+    {
+      arch: 'x64' as NodeJS.Architecture,
+      arch_candidates: ['x86_64', 'x86'],
+      x86_nock_done: true,
+      aarch64_nock_done: false,
+    },
+    {
+      arch: 'arm64' as NodeJS.Architecture,
+      arch_candidates: ['aarch64'],
+      x86_nock_done: false,
+      aarch64_nock_done: true,
+    },
+  ])(
+    'downloads the correct archive on linux $arch',
+    async ({ arch, x86_nock_done, aarch64_nock_done, arch_candidates }) => {
+      const x86_nock = nock('https://fakeaddress.com')
+        .get('/cmake-3.19.3-Linux-x86_64.tar.gz')
+        .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+      const aarch64_nock = nock('https://fakeaddress.com')
+        .get('/cmake-3.19.3-Linux-aarch64.tar.gz')
+        .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+      const candidates = v.getArchCandidates('linux', arch, false);
+      expect(candidates).toEqual(arch_candidates);
+      await setup.addCMakeToToolCache(version, 'linux', candidates);
+      expect(x86_nock.isDone()).toBe(x86_nock_done);
+      expect(aarch64_nock.isDone()).toBe(aarch64_nock_done);
+    }
+  );
 
-  it('downloads the first archive on macos', async () => {
-    const orig_platform: string = process.platform;
-    Object.defineProperty(process, 'platform', {
-      value: 'darwin',
-    });
-    expect(process.platform).toBe('darwin');
-    const first_nock = nock('https://fakeaddress.com')
-      .get('/cmake-3.19.3-macos-universal.tar.gz')
-      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
-    const second_nock = nock('https://fakeaddress.com')
-      .get('/cmake-3.19.3-macos10.10-universal.tar.gz')
-      .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
-    await setup.addCMakeToToolCache(version, ['x86_64']);
-    expect(first_nock.isDone()).toBe(true);
-    expect(second_nock.isDone()).toBe(false);
-    Object.defineProperty(process, 'platform', {
-      value: orig_platform,
-    });
-  });
+  it.each(['x64', 'arm64'] as NodeJS.Architecture[])(
+    'downloads the first archive on macos (%s)',
+    async (arch) => {
+      const first_nock = nock('https://fakeaddress.com')
+        .get('/cmake-3.19.3-macos-universal.tar.gz')
+        .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+      const second_nock = nock('https://fakeaddress.com')
+        .get('/cmake-3.19.3-macos10.10-universal.tar.gz')
+        .replyWithFile(200, path.join(dataPath, 'empty.tar.gz'));
+      const candidates = v.getArchCandidates('darwin', arch, false);
+      expect(candidates).toEqual(['universal', 'x86_64']);
+      await setup.addCMakeToToolCache(version, 'darwin', candidates);
+      expect(first_nock.isDone()).toBe(true);
+      expect(second_nock.isDone()).toBe(false);
+    }
+  );
 });
 
 describe('Using a version with both x86_64 and x86 binaries', () => {
@@ -376,51 +362,26 @@ describe('Using a version with both x86_64 and x86 binaries', () => {
     nock.enableNetConnect();
   });
 
+  const platform = 'win32';
+  const arch = 'x64';
+
   it('downloads the 32 bit package when requested', async () => {
-    const orig_platform: string = process.platform;
-    Object.defineProperty(process, 'platform', {
-      value: 'win32',
-    });
-    expect(process.platform).toBe('win32');
     const x86_nock = nock('https://url.test')
       .get('/cmake-3.20.2-windows-i386.zip')
       .replyWithFile(200, path.join(dataPath, 'empty.zip'));
-    await setup.addCMakeToToolCache(version, ['x86']);
+    const candidates = v.getArchCandidates(platform, arch, true);
+    expect(candidates).toEqual(['x86']);
+    await setup.addCMakeToToolCache(version, 'win32', candidates);
     expect(x86_nock.isDone()).toBe(true);
-    Object.defineProperty(process, 'platform', {
-      value: orig_platform,
-    });
   });
 
   it('downloads the 64 bit package when requested', async () => {
-    const orig_platform: string = process.platform;
-    Object.defineProperty(process, 'platform', {
-      value: 'win32',
-    });
-    expect(process.platform).toBe('win32');
-    const x86_nock = nock('https://url.test')
+    const x64_nock = nock('https://url.test')
       .get('/cmake-3.20.2-windows-x86_64.zip')
       .replyWithFile(200, path.join(dataPath, 'empty.zip'));
-    await setup.addCMakeToToolCache(version, ['x86_64']);
-    expect(x86_nock.isDone()).toBe(true);
-    Object.defineProperty(process, 'platform', {
-      value: orig_platform,
-    });
-  });
-
-  it('falls back to 64 bit package when both requested', async () => {
-    const orig_platform: string = process.platform;
-    Object.defineProperty(process, 'platform', {
-      value: 'win32',
-    });
-    expect(process.platform).toBe('win32');
-    const x86_nock = nock('https://url.test')
-      .get('/cmake-3.20.2-windows-x86_64.zip')
-      .replyWithFile(200, path.join(dataPath, 'empty.zip'));
-    await setup.addCMakeToToolCache(version, ['x86_64', 'x86']);
-    expect(x86_nock.isDone()).toBe(true);
-    Object.defineProperty(process, 'platform', {
-      value: orig_platform,
-    });
+    const candidates = v.getArchCandidates(platform, arch, false);
+    expect(candidates).toEqual(['x86_64', 'x86']);
+    await setup.addCMakeToToolCache(version, 'win32', candidates);
+    expect(x64_nock.isDone()).toBe(true);
   });
 });

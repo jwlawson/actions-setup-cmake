@@ -224,7 +224,7 @@ describe('When using macos 3.19.2 release', () => {
     expect(macosAsset).toEqual({
       name: 'cmake-3.19.2-macos-universal.tar.gz',
       platform: 'darwin',
-      arch: 'x86_64',
+      arch: 'universal',
       filetype: 'archive',
       url: 'https://fakeaddress.com/cmake-3.19.2-macos-universal.tar.gz',
     });
@@ -288,8 +288,9 @@ describe('When providing multiple different archs', () => {
     });
   });
 
-  it('correctly parses the aarch86 archive', async () => {
+  it('correctly parses the aarch64 archive', async () => {
     const version_info = await version.getAllVersionInfo();
+
     const selected = version.getLatestMatching('3.x', version_info);
     const assets = selected.assets;
     const macos = assets.filter((a) => a.arch != 'x86_64');
@@ -298,7 +299,7 @@ describe('When providing multiple different archs', () => {
     expect(macosAsset).toEqual({
       name: 'cmake-3.19.3-Linux-aarch64.tar.gz',
       platform: 'linux',
-      arch: '',
+      arch: 'aarch64',
       filetype: 'archive',
       url: 'https://fakeaddress.com/cmake-3.19.3-Linux-aarch64.tar.gz',
     });
