@@ -55,7 +55,7 @@ jobs:
 
     - uses: actions/setup-node@v5
       with:
-        node-version: 22
+        node-version: 24
 
     - name: Cache NPM dependencies
       uses: actions/cache@v4
