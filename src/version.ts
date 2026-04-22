@@ -22,15 +22,11 @@ interface GitHubVersion {
 }
 
 function extractPlatformFrom(filename: string): string {
-  if (filename.match(/Linux/) || filename.match(/linux/)) {
+  if (/linux/i.test(filename)) {
     return 'linux';
-  } else if (filename.match(/Darwin/) || filename.match(/macos/)) {
+  } else if (/darwin|macos/i.test(filename)) {
     return 'darwin';
-  } else if (
-    filename.match(/win32/) ||
-    filename.match(/windows/) ||
-    filename.match(/win64/)
-  ) {
+  } else if (/win32|windows|win64/i.test(filename)) {
     return 'win32';
   } else {
     return '';
@@ -57,17 +53,13 @@ function extractFileTypeFrom(filename: string): string {
 }
 
 function extractArchFrom(filename: string): string {
-  if (filename.match(/arm64/) || filename.match(/aarch64/)) {
+  if (/arm64|aarch64/.test(filename)) {
     return 'arm64';
-  } else if (filename.match(/x86_64/)) {
+  } else if (/x86_64|x64/.test(filename)) {
     return 'x86_64';
-  } else if (filename.match(/x64/)) {
-    return 'x86_64';
-  } else if (filename.match(/universal/)) {
-    return 'x86_64';
-  } else if (filename.match(/x86/)) {
-    return 'x86';
-  } else if (filename.match(/i386/)) {
+  } else if (/universal/.test(filename)) {
+    return 'universal';
+  } else if (/x86|i386/.test(filename)) {
     return 'x86';
   } else {
     return '';
@@ -166,6 +158,7 @@ export async function getAllVersionInfo(
     core.debug(`Using page count for pagination`);
     const max_pages = 20;
     let cur_page = 2;
+    let hit_page_cap = true;
     while (cur_page <= max_pages) {
       const options = getHttpOptions(api_token, cur_page);
       const version_response = await client.get<GitHubVersion[]>(
@@ -173,10 +166,16 @@ export async function getAllVersionInfo(
         options,
       );
       if (!version_response.result || version_response.result.length == 0) {
+        hit_page_cap = false;
         break;
       }
       raw_versions = raw_versions.concat(version_response.result);
       cur_page++;
+    }
+    if (hit_page_cap) {
+      core.warning(
+        `Stopped paginating CMake releases at ${max_pages} pages; older versions may be missing.`,
+      );
     }
   }
   core.debug(`overall got ${raw_versions.length} versions`);
@@ -185,7 +184,7 @@ export async function getAllVersionInfo(
 }
 
 function getLatest(version_list: vi.VersionInfo[]): vi.VersionInfo {
-  const sorted_versions: vi.VersionInfo[] = version_list.sort((a, b) =>
+  const sorted_versions: vi.VersionInfo[] = [...version_list].sort((a, b) =>
     semver.rcompare(a.name, b.name),
   );
   return sorted_versions[0];

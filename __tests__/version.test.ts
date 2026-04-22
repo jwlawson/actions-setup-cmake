@@ -224,7 +224,7 @@ describe('When using macos 3.19.2 release', () => {
     expect(macosAsset).toEqual({
       name: 'cmake-3.19.2-macos-universal.tar.gz',
       platform: 'darwin',
-      arch: 'x86_64',
+      arch: 'universal',
       filetype: 'archive',
       url: 'https://fakeaddress.com/cmake-3.19.2-macos-universal.tar.gz',
     });
