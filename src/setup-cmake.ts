@@ -10,19 +10,29 @@ function getURL(
   version: vi.VersionInfo,
   arch_candidates: Array<string>,
 ): string {
-  const assets_for_platform: vi.AssetInfo[] = version.assets
-    .filter((a) => a.platform === process.platform && a.filetype === 'archive')
-    .sort();
+  const assets_for_platform: vi.AssetInfo[] = version.assets.filter(
+    (a) => a.platform === process.platform && a.filetype === 'archive',
+  );
   // The arch_candidates provides an ordered set of architectures to try based on the
   // system architecture. The first matching asset is used. For example, on arm64 systems
   // it tries 'arm64' first, then 'x86_64', then 'x86'. On x64 systems it tries 'x86_64'
   // first, then 'x86', then 'arm64'.
-  let matching_assets = undefined;
-  for (let arch of arch_candidates) {
+  let matching_assets: vi.AssetInfo[] | undefined = undefined;
+  for (const arch of arch_candidates) {
     const arch_assets = assets_for_platform.filter((a) => a.arch === arch);
     if (arch_assets.length != 0) {
       matching_assets = arch_assets;
       break;
+    }
+  }
+  if (matching_assets == undefined) {
+    // Fall back to universal assets (e.g. macOS universal binaries) that are
+    // compatible with any of the requested architectures.
+    const universal_assets = assets_for_platform.filter(
+      (a) => a.arch === 'universal',
+    );
+    if (universal_assets.length != 0) {
+      matching_assets = universal_assets;
     }
   }
   if (matching_assets == undefined) {
@@ -50,8 +60,8 @@ function getURL(
     // package uses 10.13. As the oldest (and now deprecated) github runner is
     // on 10.15 we can safely choose to use the standard package.
     // https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners
-    const possible_assets = matching_assets.filter(
-      (a) => a.url.match('64') || a.name.match(/macos-universal/),
+    const possible_assets = matching_assets.filter((a) =>
+      /Darwin64|-x86_64|-x64|macos-universal/.test(a.name),
     );
     if (possible_assets.length > 0) {
       matching_assets = possible_assets;
@@ -120,5 +130,5 @@ export async function addCMakeToPath(
   if (!tool_path) {
     tool_path = await addCMakeToToolCache(version, arch_candidates);
   }
-  await core.addPath(await getBinDirectoryFrom(tool_path));
+  core.addPath(await getBinDirectoryFrom(tool_path));
 }
