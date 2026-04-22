@@ -1,16 +1,17 @@
-const path = require('path');
-const nock = require('nock');
+import * as path from 'path';
+import * as fs from 'fs';
+import { fileURLToPath } from 'url';
+import nock from 'nock';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const dataPath = path.join(__dirname, 'data');
 const cachePath = path.join(__dirname, 'CACHE');
 const tempPath = path.join(__dirname, 'TEMP');
-// Set temp and tool directories before importing (used to set global state)
 process.env['RUNNER_TEMP'] = tempPath;
 process.env['RUNNER_TOOL_CACHE'] = cachePath;
 
-import * as setup from '../src/setup-cmake';
-import * as vi from '../src/version-info';
-import * as fs from 'fs';
+import * as setup from '../src/setup-cmake.js';
+import * as vi from '../src/version-info.js';
 
 afterEach(() => {
   if (fs.existsSync(cachePath)) {

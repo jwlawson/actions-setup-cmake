@@ -1,8 +1,10 @@
-const path = require('path');
-const nock = require('nock');
-const dataPath = path.join(__dirname, 'data');
+import * as path from 'path';
+import { fileURLToPath } from 'url';
+import nock from 'nock';
+import * as version from '../src/version.js';
 
-import * as version from '../src/version';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const dataPath = path.join(__dirname, 'data');
 
 describe('Pulling from multipage results with Link header', () => {
   beforeEach(() => {

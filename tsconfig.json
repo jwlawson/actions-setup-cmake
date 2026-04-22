@@ -13,11 +13,11 @@
     // "sourceMap": true,                     /* Generates corresponding '.map' file. */
     // "outFile": "./",                       /* Concatenate and emit output to single file. */
     // "outDir": "./",                        /* Redirect output structure to the directory. */
-    "rootDir": "./src",                       /* Required by ncc when it compiles src/ for bundling into dist/. */
+    "rootDir": "./src",                       /* Limits source inputs to src/; tests are excluded and compiled by ts-jest. */
     // "composite": true,                     /* Enable project compilation */
     // "tsBuildInfoFile": "./",               /* Specify file to store incremental compilation information */
     // "removeComments": true,                /* Do not emit comments to output. */
-    "noEmit": true,                           /* Do not emit outputs (bundling is done by ncc into dist/). */
+    "noEmit": true,                           /* Do not emit outputs (bundling is done by esbuild into dist/). */
     // "importHelpers": true,                 /* Import emit helpers from 'tslib'. */
     // "downlevelIteration": true,            /* Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */
     // "isolatedModules": true,               /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */

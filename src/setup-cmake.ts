@@ -1,8 +1,14 @@
-import * as tc from '@actions/tool-cache';
+import {
+  cacheDir,
+  extractTar,
+  extractZip,
+  downloadTool,
+  find,
+} from '@actions/tool-cache';
 import * as core from '@actions/core';
 import { promises as fsPromises } from 'fs';
 import * as path from 'path';
-import * as vi from './version-info';
+import * as vi from './version-info.js';
 
 const PACKAGE_NAME: string = 'cmake';
 
@@ -84,11 +90,11 @@ function getURL(
 }
 
 async function getArchive(url: string): Promise<string> {
-  const download = await tc.downloadTool(url);
+  const download = await downloadTool(url);
   if (url.endsWith('zip')) {
-    return await tc.extractZip(download);
+    return await extractZip(download);
   } else if (url.endsWith('tar.gz')) {
-    return await tc.extractTar(download);
+    return await extractTar(download);
   } else {
     throw new Error(`Could not determine filetype of ${url}`);
   }
@@ -99,7 +105,7 @@ export async function addCMakeToToolCache(
   arch_candidates: Array<string>,
 ): Promise<string> {
   const extracted_archive = await getArchive(getURL(version, arch_candidates));
-  return await tc.cacheDir(extracted_archive, PACKAGE_NAME, version.name);
+  return await cacheDir(extracted_archive, PACKAGE_NAME, version.name);
 }
 
 async function getBinDirectoryFrom(tool_path: string): Promise<string> {
@@ -126,7 +132,7 @@ export async function addCMakeToPath(
   version: vi.VersionInfo,
   arch_candidates: Array<string>,
 ): Promise<void> {
-  let tool_path: string = tc.find(PACKAGE_NAME, version.name);
+  let tool_path: string = find(PACKAGE_NAME, version.name);
   if (!tool_path) {
     tool_path = await addCMakeToToolCache(version, arch_candidates);
   }

@@ -1,6 +1,6 @@
-import * as core from '@actions/core';
-import * as setup from './setup-cmake';
-import * as version from './version';
+import { getInput, info, debug, setFailed, warning } from '@actions/core';
+import { addCMakeToPath } from './setup-cmake.js';
+import { getAllVersionInfo, getLatestMatching } from './version.js';
 
 function getArchCandidates(): string[] {
   // Detect the system architecture and prioritize it
@@ -17,32 +17,30 @@ function getArchCandidates(): string[] {
     return ['x86', 'x86_64'];
   } else {
     // For other architectures, try in order of likelihood
-    core.warning(
-      `Unknown architecture ${systemArch}, defaulting to standard order`,
-    );
+    warning(`Unknown architecture ${systemArch}, defaulting to standard order`);
     return ['x86_64', 'arm64', 'x86'];
   }
 }
 
 async function run() {
   try {
-    const requested_version = core.getInput('cmake-version');
+    const requested_version = getInput('cmake-version');
     const required_version =
       requested_version === 'latest' ? '' : requested_version;
-    const api_token = core.getInput('github-api-token');
-    const all_version_info = await version.getAllVersionInfo(api_token);
-    const chosen_version_info = version.getLatestMatching(
+    const api_token = getInput('github-api-token');
+    const all_version_info = await getAllVersionInfo(api_token);
+    const chosen_version_info = getLatestMatching(
       required_version,
       all_version_info,
     );
-    core.info(`Using cmake version ${chosen_version_info.name}`);
+    info(`Using cmake version ${chosen_version_info.name}`);
 
     const arch_candidates = getArchCandidates();
-    core.debug(`Architecture candidates: ${arch_candidates.join(', ')}`);
+    debug(`Architecture candidates: ${arch_candidates.join(', ')}`);
 
-    await setup.addCMakeToPath(chosen_version_info, arch_candidates);
+    await addCMakeToPath(chosen_version_info, arch_candidates);
   } catch (error) {
-    core.setFailed((error as Error).message);
+    setFailed((error as Error).message);
   }
 }
 run();

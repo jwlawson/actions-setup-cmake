@@ -1,11 +1,11 @@
 import * as rest from 'typed-rest-client/RestClient';
-import * as core from '@actions/core';
+import { debug, warning } from '@actions/core';
 import * as semver from 'semver';
-import * as vi from './version-info';
+import * as vi from './version-info.js';
 
 const VERSION_URL: string =
   'https://api.github.com/repos/Kitware/CMake/releases';
-const USER_AGENT: string = 'jwlawson-actions-setup-cmake';
+const USER_AGENT: string = 'akshaybabloo-actions-setup-cmake';
 
 interface GithubAsset {
   name: string;
@@ -139,7 +139,7 @@ export async function getAllVersionInfo(
   // returned.
   let headers: { link?: string } = version_response.headers;
   if (headers.link) {
-    core.debug(`Using link headers for pagination`);
+    debug(`Using link headers for pagination`);
     let next = getNextFromLink(headers.link);
     while (next) {
       const options = getHttpOptions(api_token);
@@ -155,7 +155,7 @@ export async function getAllVersionInfo(
       next = getNextFromLink(headers.link);
     }
   } else {
-    core.debug(`Using page count for pagination`);
+    debug(`Using page count for pagination`);
     const max_pages = 20;
     let cur_page = 2;
     let hit_page_cap = true;
@@ -173,12 +173,12 @@ export async function getAllVersionInfo(
       cur_page++;
     }
     if (hit_page_cap) {
-      core.warning(
+      warning(
         `Stopped paginating CMake releases at ${max_pages} pages; older versions may be missing.`,
       );
     }
   }
-  core.debug(`overall got ${raw_versions.length} versions`);
+  debug(`overall got ${raw_versions.length} versions`);
   const versions: vi.VersionInfo[] = convertToVersionInfo(raw_versions);
   return versions;
 }
